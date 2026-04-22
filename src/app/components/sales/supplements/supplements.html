@@ -1,0 +1,31 @@
+<div class="shop-header">
+  <h2>💊 Supplements</h2>
+  <p>Keep your pet healthy and strong</p>
+  <div class="search-bar">
+    <input type="text" placeholder="Search products..." [(ngModel)]="searchQuery" (input)="filterProducts()" />
+    <span class="search-icon">🔍</span>
+  </div>
+</div>
+
+<div class="container py-5">
+  <div class="row g-4">
+    @for (product of filteredProducts; track product.id) {
+      <div class="col-6 col-md-3">
+        <div class="product-card">
+          <div class="product-img">
+            <img [src]="product.image" [alt]="product.name" />
+            <span class="product-badge" *ngIf="product.badge">{{ product.badge }}</span>
+          </div>
+          <div class="product-info">
+            <h6>{{ product.name }}</h6>
+            <p>{{ product.description }}</p>
+            <div class="product-footer">
+              <span class="product-price">${{ product.price }}</span>
+              <button class="btn-add">Add to cart</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    }
+  </div>
+</div>

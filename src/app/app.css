@@ -1,0 +1,35 @@
+.navbar {
+  background: #094545 !important;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+
+}
+
+.nav-link {
+  transition: transform 0.2s ease, border 0.2s ease;
+  display: inline-block;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  padding: 4px 8px;
+  color: #ffffff;
+}
+
+.nav-link:hover {
+  transform: scale(1.15);
+/border: 1px solid rgba(255, 255, 255, 0.4);/
+
+}
+.navbar-nav {
+  gap: 8px;
+  font-size: 20px;
+}
+.navbar-brand{
+  font-size: 20px;
+  color: #ffffff;
+}
+.white-paw {
+  filter: brightness(0) invert(1);
+}

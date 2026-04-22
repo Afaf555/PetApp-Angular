@@ -1,0 +1,223 @@
+.form-wrapper {
+  background: #f7f4f0;
+  /*padding: 48px 16px;*/
+  display: flex;
+  justify-content: center;
+}
+
+.report-card {
+  background: #fff;
+  border-radius: 16px;
+  border: 0.5px solid #e5ddd5;
+  padding: 40px 48px;
+  padding-top: 10px;
+  width: 750px;
+  max-width: 100%;
+}
+
+.report-header {
+  text-align: center;
+  margin-bottom: 5px;
+  color: rgb(29, 122, 192);
+
+}
+
+.report-icon {
+  font-size: 32px;
+  display: block;
+  margin-bottom: 8px;
+}
+
+ .report-header h2 {
+  font-size: 22px;
+  font-weight: 600;
+  color: rgb(29, 122, 192);
+  margin-bottom: 8px;
+}
+
+.report-header p {
+  font-size: 14px;
+  color: #888;
+  margin: 0;
+}
+
+.form-group {
+  margin-bottom: 6px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 13px;
+  font-weight: 500;
+  color: #444;
+  margin-bottom: 6px;
+}
+
+.form-control, .form-select {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 14px;
+  width: 100%;
+  color: #333;
+  background: #fafafa;
+  transition: border-color 0.2s;
+}
+
+.form-control:focus, .form-select:focus {
+  border-color: #a9683a;
+  outline: none;
+  background: #fff;
+}
+
+.form-row-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 6px;
+}
+
+.upload-box {
+  border: 1.5px dashed #ccc;
+  border-radius: 8px;
+  padding: 24px;
+  text-align: center;
+  cursor: pointer;
+  color: #999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  background: #fafafa;
+  transition: border-color 0.2s;
+}
+
+.upload-box:hover {
+  border-color: rgb(29, 122, 192);
+  color: rgb(29, 122, 192);
+}
+
+.upload-icon {
+  font-size: 22px;
+}
+
+.upload-box small {
+  font-size: 11px;
+  color: #bbb;
+}
+
+.preview img {
+  max-width: 160px;
+  border-radius: 8px;
+  border: 0.5px solid #e0e0e0;
+}
+
+.btn-submit {
+  width: 100%;
+  background: rgb(29, 122, 192);
+  color: #fff;
+  border: none;
+  padding: 13px;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  margin-top: 8px;
+  transition: background 0.2s;
+}
+
+.btn-submit:hover {
+  background: rgb(9, 103, 187);
+}
+
+.success-msg {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: #f0faf0;
+  border: 1px solid #b2dfb2;
+  border-radius: 8px;
+  padding: 16px 20px;
+  margin-top: 24px;
+  font-size: 14px;
+}
+
+.success-msg span {
+  font-size: 24px;
+}
+
+.success-msg strong {
+  display: block;
+  color: #2e7d32;
+  margin-bottom: 2px;
+}
+
+.success-msg p {
+  margin: 0;
+  color: #555;
+}
+
+.lost-pets-section {
+  background: #fdf8f0;
+}
+
+.lost-pet-card {
+  background: #fff;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 0.5px solid #e8d8c0;
+  transition: transform 0.2s ease;
+}
+
+.lost-pet-card:hover {
+  transform: translateY(-4px);
+}
+
+.lost-pet-img {
+  height: 180px;
+  overflow: hidden;
+}
+
+.lost-pet-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.lost-pet-info {
+  padding: 12px;
+  text-align: center;
+}
+
+.lost-pet-info h6 {
+  font-weight: 600;
+  margin-bottom: 4px;
+  color: #333;
+}
+
+.lost-pet-info p {
+  font-size: 12px;
+  color: #888;
+  margin-bottom: 10px;
+}
+
+.btn-take-home {
+  background: #a9683a;
+  color: #fff;
+  border: none;
+  padding: 6px 18px;
+  border-radius: 20px;
+  font-size: 13px;
+}
+
+.btn-take-home:hover {
+  background: #8a5230;
+}
+
+.see-more {
+  font-size: 14px;
+  color: #888;
+}
+.form-wrapper.py-5{
+  margin-top: 50px;
+}
