@@ -1,18 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { NgIf, NgFor } from '@angular/common';
 import { PetService } from '../../../services/pet';
 
 @Component({
   selector: 'app-want-to-adopt',
   standalone: true,
-  imports: [FormsModule, NgIf, NgFor],
+  imports: [FormsModule],
   templateUrl: './want-to-adopt.html',
   styleUrls: ['./want-to-adopt.css']
 })
 export class WantToAdopt implements OnInit {
-
   submitted = false;
+  showModal = false;
   pets: any[] = [];
 
   adoptForm = {
@@ -25,21 +24,36 @@ export class WantToAdopt implements OnInit {
     reason: ''
   };
 
-  constructor(private petService: PetService) {}
+  constructor(private petService: PetService, private cdr: ChangeDetectorRef) {}
 
   ngOnInit() {
+    this.loadPets();
+  }
+
+  loadPets() {
     this.petService.getAdoptionPets().subscribe({
       next: (data) => {
-        this.pets = data;
+        this.pets = [...data];
+        this.cdr.detectChanges();
       },
-      error: (err) => {
-        console.error(err);
-      }
+      error: (err) => console.error(err)
     });
   }
 
-  trackById(index: number, item: any) {
-    return item.id;
+  openModal() {
+    this.showModal = true;
+    this.submitted = false;
+    this.cdr.detectChanges();
+  }
+
+  closeModal() {
+    this.showModal = false;
+    this.submitted = false;
+    this.adoptForm = {
+      fullName: '', email: '', phone: '',
+      petType: 'Dog', living: 'Apartment', otherPets: 'No', reason: ''
+    };
+    this.cdr.detectChanges();
   }
 
   onSubmit() {
@@ -51,15 +65,8 @@ export class WantToAdopt implements OnInit {
     this.petService.saveAdoptionRequest(this.adoptForm).subscribe({
       next: () => {
         this.submitted = true;
-        this.adoptForm = {
-          fullName: '',
-          email: '',
-          phone: '',
-          petType: 'Dog',
-          living: 'Apartment',
-          otherPets: 'No',
-          reason: ''
-        };
+        this.cdr.detectChanges();
+        setTimeout(() => this.closeModal(), 2500);
       },
       error: (err) => console.error(err)
     });

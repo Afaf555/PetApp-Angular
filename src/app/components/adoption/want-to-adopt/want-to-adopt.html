@@ -1,117 +1,112 @@
-<div class="form-wrapper py-5">
-  <div class="report-card">
-
-    <div class="report-header">
-      <span class="report-icon">🐶</span>
-      <h2>Adopt a Pet</h2>
-      <p>Fill the form to adopt your future best friend.</p>
-    </div>
-
-    <form (ngSubmit)="onSubmit()">
-
-      <div class="form-group">
-        <label>Full Name</label>
-        <input type="text" class="form-control"
-               [(ngModel)]="adoptForm.fullName"
-               name="fullName"
-               required>
-      </div>
-
-      <div class="form-group">
-        <label>Email</label>
-        <input type="email" class="form-control"
-               [(ngModel)]="adoptForm.email"
-               name="email"
-               required>
-      </div>
-
-      <div class="form-group">
-        <label>Phone</label>
-        <input type="text" class="form-control"
-               [(ngModel)]="adoptForm.phone"
-               name="phone">
-      </div>
-
-      <div class="form-row-2">
-        <div class="form-group">
-          <label>Pet Type</label>
-          <select class="form-select"
-                  [(ngModel)]="adoptForm.petType"
-                  name="petType">
-            <option>Dog</option>
-            <option>Cat</option>
-            <option>Other</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label>Living</label>
-          <select class="form-select"
-                  [(ngModel)]="adoptForm.living"
-                  name="living">
-            <option>Apartment</option>
-            <option>House</option>
-            <option>Farm</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label>Do you have other pets?</label>
-        <select class="form-select"
-                [(ngModel)]="adoptForm.otherPets"
-                name="otherPets">
-          <option>No</option>
-          <option>Yes</option>
-        </select>
-      </div>
-
-      <div class="form-group">
-        <label>Why do you want to adopt?</label>
-        <textarea class="form-control" rows="3"
-                  [(ngModel)]="adoptForm.reason"
-                  name="reason">
-        </textarea>
-      </div>
-
-      <button type="submit" class="btn-submit">Send Request</button>
-    </form>
-
-    <!-- SUCCESS -->
-    <div *ngIf="submitted" class="success-msg">
-      <span>✅</span>
-      <div>
-        <strong>Request sent!</strong>
-        <p>We will contact you soon 🐾</p>
-      </div>
-    </div>
-
+<div class="page-header-bar">
+  <div class="container d-flex justify-content-between align-items-center">
+    <h2 class="page-title">Adopt a Pet</h2>
+    <button class="btn-open-modal" (click)="openModal()">+ Send adoption request</button>
   </div>
 </div>
 
-<!-- PET LIST -->
-<div class="lost-pets-section py-5">
-  <div class="container">
-    <h3 class="text-center mb-4">Available Pets</h3>
+@if (showModal) {
+  <div class="modal-overlay" (click)="closeModal()">
+    <div class="modal-box" (click)="$event.stopPropagation()">
+      <button class="modal-close-btn" (click)="closeModal()">✕</button>
 
-    <div class="row g-3">
-      <div class="col-6 col-md-3"
-           *ngFor="let pet of pets; trackBy: trackById">
+      <div class="modal-header">
+        <span class="modal-icon">🐶</span>
+        <h3>Adoption Request</h3>
+        <p>Tell us about yourself and what kind of pet you're looking for.</p>
+      </div>
 
-        <div class="lost-pet-card">
-          <div class="lost-pet-img">
-            <img [src]="pet.image" [alt]="pet.name" />
+      @if (!submitted) {
+        <form (ngSubmit)="onSubmit()">
+          <div class="fp-group">
+            <label>Full Name *</label>
+            <input class="fp-input" type="text" [(ngModel)]="adoptForm.fullName" name="fullName" placeholder="Your full name">
           </div>
 
-          <div class="lost-pet-info">
-            <h6>{{ pet.name }}</h6>
-            <p>{{ pet.age }}, {{ pet.description }}</p>
-            <button class="btn btn-take-home">Adopt 🐾</button>
+          <div class="fp-row-2">
+            <div class="fp-group">
+              <label>Email *</label>
+              <input class="fp-input" type="email" [(ngModel)]="adoptForm.email" name="email" placeholder="your@email.com">
+            </div>
+            <div class="fp-group">
+              <label>Phone</label>
+              <input class="fp-input" type="text" [(ngModel)]="adoptForm.phone" name="phone" placeholder="+389...">
+            </div>
+          </div>
+
+          <div class="fp-row-2">
+            <div class="fp-group">
+              <label>Pet Type</label>
+              <select class="fp-select" [(ngModel)]="adoptForm.petType" name="petType">
+                <option>Dog</option>
+                <option>Cat</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="fp-group">
+              <label>Living Situation</label>
+              <select class="fp-select" [(ngModel)]="adoptForm.living" name="living">
+                <option>Apartment</option>
+                <option>House</option>
+                <option>Farm</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="fp-group">
+            <label>Do you have other pets?</label>
+            <select class="fp-select" [(ngModel)]="adoptForm.otherPets" name="otherPets">
+              <option>No</option>
+              <option>Yes</option>
+            </select>
+          </div>
+
+          <div class="fp-group">
+            <label>Why do you want to adopt?</label>
+            <textarea class="fp-textarea" rows="3" [(ngModel)]="adoptForm.reason" name="reason" placeholder="Tell us your story..."></textarea>
+          </div>
+
+          <button type="submit" class="fp-submit">Send Request</button>
+        </form>
+      }
+
+      @if (submitted) {
+        <div class="fp-success">
+          <span class="s-icon">✅</span>
+          <div>
+            <strong>Request sent!</strong>
+            <p>We will contact you soon 🐾</p>
           </div>
         </div>
-
-      </div>
+      }
     </div>
+  </div>
+}
 
+<!-- PET LIST -->
+<div class="pet-grid-section">
+  <div class="container">
+    <h3 class="text-center mb-4">Available Pets for Adoption</h3>
+    <div class="row g-3">
+      @for (pet of pets; track pet.id) {
+        <div class="col-6 col-md-3">
+          <div class="pet-grid-card">
+            <div class="pet-grid-img">
+              <img [src]="pet.image" [alt]="pet.name" />
+            </div>
+            <div class="pet-grid-body">
+              <h6>{{ pet.name }}</h6>
+              <p>{{ pet.age }}, {{ pet.description }}</p>
+              <button class="btn-pet">Adopt 🐾</button>
+            </div>
+          </div>
+        </div>
+      }
+      @if (pets.length === 0) {
+        <div class="col-12 text-center py-4">
+          <p style="color: #6b6b6b;">No pets available yet. Check back soon!</p>
+        </div>
+      }
+    </div>
   </div>
 </div>

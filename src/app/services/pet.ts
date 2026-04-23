@@ -22,4 +22,11 @@ export class PetService {
   getAdoptionRequests(): Observable<any[]> {
     return this.http.get<any[]>(`${this.api}/adoption-requests`);
   }
+  getLostPets(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.api}/lost`);
+  }
+
+  saveLostPet(pet: any): Observable<any> {
+    return this.http.post(this.api, pet);
+  }
 }

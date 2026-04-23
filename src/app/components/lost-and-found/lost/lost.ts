@@ -1,18 +1,23 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation, ChangeDetectorRef, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { NgIf } from '@angular/common';
+import { PetService } from '../../../services/pet';
 
 @Component({
   selector: 'app-lost',
-  imports: [FormsModule, NgIf],
+  imports: [FormsModule],
   templateUrl: './lost.html',
   styleUrl: './lost.css',
   encapsulation: ViewEncapsulation.None
 })
-export class Lost {
+export class Lost implements OnInit {
   formType = 'lost';
   submitted = false;
+  showModal = false;
   previewUrl: string | null = null;
+  sortBy = 'newest';
+  lostPets: any[] = [];
+
+  constructor(private petService: PetService, private cdr: ChangeDetectorRef) {}
 
   petForm = {
     name: '',
@@ -26,29 +31,86 @@ export class Lost {
     contact: ''
   };
 
-  lostPets = [
-    { id: 1, name: 'Cony', age: '3 y.o.', description: 'loves to play in the shade', image: 'assets/images/cat3.jpg' },
-    { id: 2, name: 'Martin', age: '1 y.o.', description: 'mix of butter', image: 'assets/images/cat4.jpg' },
-    { id: 3, name: 'Max', age: '2 y.o.', description: 'loves making friends', image: 'assets/images/dog3.jpg' },
-    { id: 4, name: 'Lesley', age: '8 m.o.', description: 'loves walking freely', image: 'assets/images/dog4.jpg' },
-    { id: 5, name: 'Finn', age: '7 y.o.', description: 'already ready to have fun', image: 'assets/images/dog5.webp' },
-    { id: 6, name: 'Sam', age: '5 y.o.', description: 'the happiest dog ever', image: 'assets/images/dog6.webp' },
-    { id: 7, name: 'Didi', age: '4 y.o.', description: 'a real swimmer', image: 'assets/images/dog7.webp' },
-    { id: 8, name: 'Lenny', age: '8 m.o.', description: 'best companion for relaxing', image: 'assets/images/dog8.webp' },
-  ];
+  ngOnInit() {
+    this.loadLostPets();
+  }
+
+  loadLostPets() {
+    this.petService.getLostPets().subscribe({
+      next: (data) => {
+        this.lostPets = data;
+        this.cdr.detectChanges();
+      },
+      error: (err) => console.error(err)
+    });
+  }
+
+  get sortedPets() {
+    return [...this.lostPets].sort((a, b) => {
+      const dateA = new Date(a.date || a.createdAt).getTime();
+      const dateB = new Date(b.date || b.createdAt).getTime();
+      return this.sortBy === 'newest' ? dateB - dateA : dateA - dateB;
+    });
+  }
+
+  openModal() {
+    this.showModal = true;
+    this.submitted = false;
+    this.cdr.detectChanges();
+  }
+
+  closeModal() {
+    this.showModal = false;
+    this.submitted = false;
+    this.petForm = {
+      name: '', type: 'Dog', breed: '', color: '',
+      gender: 'Male', location: '', date: '', description: '', contact: ''
+    };
+    this.previewUrl = null;
+    this.cdr.detectChanges();
+  }
 
   onImageSelected(event: Event) {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files[0]) {
+      const canvas = document.createElement('canvas');
+      const img = new Image();
       const reader = new FileReader();
       reader.onload = (e) => {
-        this.previewUrl = e.target?.result as string;
+        img.onload = () => {
+          const maxWidth = 400;
+          const scale = Math.min(1, maxWidth / img.width);
+          canvas.width = img.width * scale;
+          canvas.height = img.height * scale;
+          const ctx = canvas.getContext('2d')!;
+          ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+          this.previewUrl = canvas.toDataURL('image/jpeg', 0.6);
+          this.cdr.detectChanges();
+        };
+        img.src = e.target?.result as string;
       };
       reader.readAsDataURL(input.files[0]);
     }
   }
 
   onSubmit() {
-    this.submitted = true;
+    const pet = {
+      ...this.petForm,
+      status: 'lost',
+      image: this.previewUrl || ''
+    };
+
+    this.petService.saveLostPet(pet).subscribe({
+      next: () => {
+        this.submitted = true;
+        this.cdr.detectChanges();
+        this.loadLostPets();
+        setTimeout(() => this.closeModal(), 2500);
+      },
+      error: (err) => {
+        console.error(err);
+        alert('Something went wrong. Please try again.');
+      }
+    });
   }
 }

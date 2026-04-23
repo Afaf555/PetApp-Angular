@@ -1,10 +1,9 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation, ChangeDetectorRef } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-found',
-  imports: [FormsModule, NgIf],
+  imports: [FormsModule],
   templateUrl: './found.html',
   styleUrl: './found.css',
   encapsulation: ViewEncapsulation.None
@@ -12,7 +11,11 @@ import { NgIf } from '@angular/common';
 export class Found {
   formType = 'found';
   submitted = false;
+  showModal = false;
   previewUrl: string | null = null;
+  sortBy = 'newest';
+
+  constructor(private cdr: ChangeDetectorRef) {}
 
   petForm = {
     name: '',
@@ -27,11 +30,38 @@ export class Found {
   };
 
   foundPets = [
-    { id: 1, name: 'Unknown', age: '~2 y.o.', description: 'found near city park', image: 'assets/images/cat.jpg' },
-    { id: 2, name: 'Unknown', age: '~1 y.o.', description: 'found on main street', image: 'assets/images/dog14.webp' },
-    { id: 3, name: 'Unknown', age: '~3 y.o.', description: 'found near school', image: 'assets/images/dog8.webp' },
-    { id: 4, name: 'Unknown', age: '~5 y.o.', description: 'found in neighborhood', image: 'assets/images/dog15.webp' },
+    { id: 1, name: 'Unknown', age: '~2 y.o.', description: 'found near city park', image: 'assets/images/cat.jpg', date: '2026-04-22' },
+    { id: 2, name: 'Unknown', age: '~1 y.o.', description: 'found on main street', image: 'assets/images/dog14.webp', date: '2026-04-20' },
+    { id: 3, name: 'Unknown', age: '~3 y.o.', description: 'found near school', image: 'assets/images/dog8.webp', date: '2026-04-15' },
+    { id: 4, name: 'Unknown', age: '~5 y.o.', description: 'found in neighborhood', image: 'assets/images/dog15.webp', date: '2026-04-10' },
   ];
+
+  get sortedPets() {
+    return [...this.foundPets].sort((a, b) => {
+      if (this.sortBy === 'newest') {
+        return new Date(b.date).getTime() - new Date(a.date).getTime();
+      } else {
+        return new Date(a.date).getTime() - new Date(b.date).getTime();
+      }
+    });
+  }
+
+  openModal() {
+    this.showModal = true;
+    this.submitted = false;
+    this.cdr.detectChanges();
+  }
+
+  closeModal() {
+    this.showModal = false;
+    this.submitted = false;
+    this.petForm = {
+      name: '', type: 'Dog', breed: '', color: '',
+      gender: 'Male', location: '', date: '', description: '', contact: ''
+    };
+    this.previewUrl = null;
+    this.cdr.detectChanges();
+  }
 
   onImageSelected(event: Event) {
     const input = event.target as HTMLInputElement;
@@ -39,6 +69,7 @@ export class Found {
       const reader = new FileReader();
       reader.onload = (e) => {
         this.previewUrl = e.target?.result as string;
+        this.cdr.detectChanges();
       };
       reader.readAsDataURL(input.files[0]);
     }
@@ -46,5 +77,7 @@ export class Found {
 
   onSubmit() {
     this.submitted = true;
+    this.cdr.detectChanges();
+    setTimeout(() => this.closeModal(), 2500);
   }
 }

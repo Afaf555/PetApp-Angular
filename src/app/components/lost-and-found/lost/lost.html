@@ -1,114 +1,144 @@
-<div class="form-wrapper py-5">
-  <div class="report-card">
-    <div class="report-header">
-      <span class="report-icon">🐾</span>
-      <h2>Report a Lost Pet</h2>
-      <p>Fill in the details below and we'll do our best to help reunite you with your pet.</p>
-    </div>
-
-    <form (ngSubmit)="onSubmit()">
-      <input type="hidden" [value]="formType">
-
-      <div class="form-group">
-        <label>Pet Name</label>
-        <input type="text" class="form-control" placeholder="e.g. Bella" [(ngModel)]="petForm.name" name="name">
-      </div>
-
-      <div class="form-row-2">
-        <div class="form-group">
-          <label>Type</label>
-          <select class="form-select" [(ngModel)]="petForm.type" name="type">
-            <option>Dog</option>
-            <option>Cat</option>
-            <option>Other</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label>Breed</label>
-          <input type="text" class="form-control" placeholder="e.g. Labrador" [(ngModel)]="petForm.breed" name="breed">
-        </div>
-      </div>
-
-      <div class="form-row-2">
-        <div class="form-group">
-          <label>Color</label>
-          <input type="text" class="form-control" placeholder="e.g. Golden" [(ngModel)]="petForm.color" name="color">
-        </div>
-        <div class="form-group">
-          <label>Gender</label>
-          <select class="form-select" [(ngModel)]="petForm.gender" name="gender">
-            <option>Male</option>
-            <option>Female</option>
-            <option>Unknown</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label>Last Seen Location</label>
-        <input type="text" class="form-control" placeholder="City, street..." [(ngModel)]="petForm.location" name="location">
-      </div>
-
-      <div class="form-group">
-        <label>Date Last Seen</label>
-        <input type="date" class="form-control" [(ngModel)]="petForm.date" name="date">
-      </div>
-
-      <div class="form-group">
-        <label>Description</label>
-        <textarea class="form-control" rows="3" placeholder="Details, behavior, collar, etc..." [(ngModel)]="petForm.description" name="description"></textarea>
-      </div>
-
-      <div class="form-group">
-        <label>Upload Image</label>
-        <div class="upload-box" (click)="imageInput.click()">
-          <span class="upload-icon">📎</span>
-          <span>Click to upload or drag & drop</span>
-          <small>PNG, JPG up to 5MB</small>
-        </div>
-        <input type="file" #imageInput hidden (change)="onImageSelected($event)">
-        <div class="preview mt-2" *ngIf="previewUrl">
-          <img [src]="previewUrl" alt="preview">
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label>Contact Info</label>
-        <input type="text" class="form-control" placeholder="Phone or email" [(ngModel)]="petForm.contact" name="contact">
-      </div>
-
-      <button type="submit" class="btn-submit">Submit Report</button>
-    </form>
-
-    <div *ngIf="submitted" class="success-msg">
-      <span>✅</span>
-      <div>
-        <strong>Successfully submitted!</strong>
-        <p>Best of luck finding your pet 🐾</p>
-      </div>
-    </div>
+<!-- HEADER BAR -->
+<div class="page-header-bar">
+  <div class="container d-flex justify-content-between align-items-center">
+    <h2 class="page-title">Lost Pets</h2>
+    <button class="btn-open-modal" (click)="openModal()">+ Report a lost pet</button>
   </div>
 </div>
 
-<div class="lost-pets-section py-5">
+<!-- MODAL -->
+@if (showModal) {
+  <div class="modal-overlay" (click)="closeModal()">
+    <div class="modal-box" (click)="$event.stopPropagation()">
+      <button class="modal-close-btn" (click)="closeModal()">✕</button>
+
+      <div class="modal-header">
+        <span class="modal-icon">🐾</span>
+        <h3>Report a Lost Pet</h3>
+        <p>Fill in the details and we'll help reunite you with your pet.</p>
+      </div>
+
+      @if (!submitted) {
+        <div class="modal-body-scroll">
+          <form (ngSubmit)="onSubmit()" id="lostPetForm">
+            <div class="fp-group">
+              <label>Pet Name</label>
+              <input class="fp-input" type="text" placeholder="e.g. Bella" [(ngModel)]="petForm.name" name="name">
+            </div>
+
+            <div class="fp-row-2">
+              <div class="fp-group">
+                <label>Type</label>
+                <select class="fp-select" [(ngModel)]="petForm.type" name="type">
+                  <option>Dog</option>
+                  <option>Cat</option>
+                  <option>Other</option>
+                </select>
+              </div>
+              <div class="fp-group">
+                <label>Breed</label>
+                <input class="fp-input" type="text" placeholder="e.g. Labrador" [(ngModel)]="petForm.breed" name="breed">
+              </div>
+            </div>
+
+            <div class="fp-row-2">
+              <div class="fp-group">
+                <label>Color</label>
+                <input class="fp-input" type="text" placeholder="e.g. Golden" [(ngModel)]="petForm.color" name="color">
+              </div>
+              <div class="fp-group">
+                <label>Gender</label>
+                <select class="fp-select" [(ngModel)]="petForm.gender" name="gender">
+                  <option>Male</option>
+                  <option>Female</option>
+                  <option>Unknown</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="fp-group">
+              <label>Last Seen Location</label>
+              <input class="fp-input" type="text" placeholder="City, street..." [(ngModel)]="petForm.location" name="location">
+            </div>
+
+            <div class="fp-group">
+              <label>Date Last Seen</label>
+              <input class="fp-input" type="date" [(ngModel)]="petForm.date" name="date">
+            </div>
+
+            <div class="fp-group">
+              <label>Description</label>
+              <textarea class="fp-textarea" rows="3" placeholder="Details, behavior, collar..." [(ngModel)]="petForm.description" name="description"></textarea>
+            </div>
+
+            <div class="fp-group">
+              <label>Upload Image</label>
+              <div class="fp-upload" (click)="imageInput.click()">
+                <span class="up-icon">📎</span>
+                <span>Click to upload</span>
+                <small>PNG, JPG up to 5MB</small>
+              </div>
+              <input type="file" #imageInput hidden (change)="onImageSelected($event)">
+              @if (previewUrl) {
+                <div class="fp-preview">
+                  <img [src]="previewUrl" alt="preview">
+                </div>
+              }
+            </div>
+
+            <div class="fp-group">
+              <label>Contact Info</label>
+              <input class="fp-input" type="text" placeholder="Phone or email" [(ngModel)]="petForm.contact" name="contact">
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer-sticky">
+          <button type="submit" form="lostPetForm" class="fp-submit">Submit Report</button>
+        </div>
+      }
+
+      @if (submitted) {
+        <div class="fp-success">
+          <span class="s-icon">✅</span>
+          <div>
+            <strong>Successfully submitted!</strong>
+            <p>Best of luck finding your pet 🐾</p>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+}
+
+<div class="pet-grid-section">
   <div class="container">
-    <h3 class="text-center mb-4">Recently Lost Pets</h3>
+    <div class="sort-bar">
+      <h3>Recently Lost Pets</h3>
+      <div class="sort-controls">
+        <label>Sort by:</label>
+        <select [(ngModel)]="sortBy" name="sortBy" class="sort-select">
+          <option value="newest">Newest first</option>
+          <option value="oldest">Oldest first</option>
+        </select>
+      </div>
+    </div>
+
     <div class="row g-3">
-      @for (pet of lostPets; track pet.id) {
+      @for (pet of sortedPets; track pet.id) {
         <div class="col-6 col-md-3">
-          <div class="lost-pet-card">
-            <div class="lost-pet-img">
+          <div class="pet-grid-card">
+            <div class="pet-grid-img">
               <img [src]="pet.image" [alt]="pet.name" />
             </div>
-            <div class="lost-pet-info">
+            <div class="pet-grid-body">
               <h6>{{ pet.name }}</h6>
               <p>{{ pet.age }}, {{ pet.description }}</p>
-              <button class="btn btn-take-home">Comment 🏠</button>
+              <small class="pet-date">📅 {{ pet.date }}</small>
+              <button class="btn-pet">I found this pet 🐾</button>
             </div>
           </div>
         </div>
       }
     </div>
-    <p class="text-center mt-4 see-more">See other <strong>{{ lostPets.length }}</strong> pets</p>
   </div>
 </div>

@@ -1,15 +1,25 @@
-<div class="shop-wrapper">
-  <div class="shop-header">
-    <h2>🍖 Pet Food</h2>
-    <p>Quality nutrition for your furry friends</p>
+<div class="shop-header">
+  <div class="shop-header-inner">
+
+    <div class="shop-title">
+      <h2>Food</h2>
+      <!--      <p>Everything your pet needs to look and feel great</p>-->
+    </div>
+
     <div class="search-bar">
-      <input type="text" placeholder="Search products..." [(ngModel)]="searchQuery" (input)="filterProducts()" />
+      <input type="text" placeholder="Search products..."
+             [(ngModel)]="searchQuery"
+             (input)="filterProducts()" />
       <span class="search-icon">🔍</span>
     </div>
+
   </div>
+</div>
+
+<div class="section-bg">
 
 
-  <div class="container py-5">
+<div class="container py-5">
     <div class="row g-4">
       @for (product of filteredProducts; track product.id) {
         <div class="col-6 col-md-3">

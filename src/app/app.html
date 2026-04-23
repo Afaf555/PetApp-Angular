@@ -1,7 +1,9 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container">
-    <span class="navbar-brand white-paw">🐾</span>
+    <!--    <a class="navbar-brand" routerLink="/">-->
+    <span class="white-paw">🐾</span>
     <a class="navbar-brand" routerLink="/">PawPaw</a>
+    <!--      PawPaw</a>-->
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
       <span class="navbar-toggler-icon"></span>
@@ -34,8 +36,9 @@
           <ul class="dropdown-menu dropdown-menu-dark">
             <li><a class="dropdown-item" routerLink="/sales/food">Food</a></li>
             <li><a class="dropdown-item" routerLink="/sales/accessories">Accessories</a></li>
-            <li><a class="dropdown-item" routerLink="/sales/clothing">Clothes</a></li>
+            <li><a class="dropdown-item" routerLink="/sales/clothing">Clothing</a></li>
             <li><a class="dropdown-item" routerLink="/sales/supplements">Supplements</a></li>
+            <!--            <li><a class="dropdown-item" routerLink="/sales/other">Other</a></li>-->
           </ul>
         </li>
 
@@ -60,4 +63,54 @@
   </div>
 </nav>
 
-<router-outlet />
+
+
+<router-outlet></router-outlet>
+<footer class="footer">
+  <div class="container">
+    <div class="row">
+
+      <!-- Column 1 - Navigation -->
+      <div class="col-md-4 footer-col">
+        <h6>PawPaw</h6>
+        <ul>
+          <li><a routerLink="/">Home</a></li>
+          <li><a routerLink="/lost-and-found/lost">Lost</a></li>
+          <li><a routerLink="/lost-and-found/found">Found</a></li>
+          <li><a routerLink="/sales/food">Food</a></li>
+          <li><a routerLink="/sales/accessories">Accessories</a></li>
+          <li><a routerLink="/veterinarian">Veterinarian</a></li>
+          <li><a routerLink="/adoption/want">Adopt</a></li>
+        </ul>
+      </div>
+
+      <!-- Column 2 - Contact -->
+      <div class="col-md-4 footer-col">
+        <h6>Contact</h6>
+        <p>📍 Skopje, North Macedonia</p>
+        <p>📞 +389 70 123 456</p>
+        <p>✉️ pawpaw@gmail.com</p>
+      </div>
+
+      <!-- Column 3 - Extra (nice touch 😏) -->
+      <div class="col-md-4 footer-col">
+        <h6>About PawPaw</h6>
+        <p>
+          Helping pets find homes, reconnect with owners, and live better lives
+          <span class="white-paw">🐾</span>
+        </p>
+
+        <div class="socials">
+          <span>🐶</span>
+          <span>🐱</span>
+          <span class="white-paw">🐾</span>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom text-center">
+      <span class="white-paw">🐾 PawPaw © 2026 • Made with ❤️</span>
+    </div>
+  </div>
+</footer>

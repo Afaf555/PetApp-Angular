@@ -1,96 +1,92 @@
-<div class="form-wrapper py-5">
-  <div class="report-card">
-
-    <div class="report-header">
-      <span class="report-icon">🏡</span>
-      <h2>Have a Pet for Adoption</h2>
-      <p>Share details about a pet looking for a new home.</p>
-    </div>
-
-    <form (ngSubmit)="onSubmit()">
-
-      <div class="form-group">
-        <label>Pet Name</label>
-        <input type="text" class="form-control"
-               [(ngModel)]="petForm.name"
-               name="name" required>
-      </div>
-
-      <div class="form-row-2">
-        <div class="form-group">
-          <label>Type</label>
-          <select class="form-select"
-                  [(ngModel)]="petForm.type"
-                  name="type">
-            <option>Dog</option>
-            <option>Cat</option>
-            <option>Other</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label>Breed</label>
-          <input type="text" class="form-control"
-                 [(ngModel)]="petForm.breed"
-                 name="breed">
-        </div>
-      </div>
-
-      <div class="form-row-2">
-        <div class="form-group">
-          <label>Age</label>
-          <input type="text" class="form-control"
-                 [(ngModel)]="petForm.age"
-                 name="age">
-        </div>
-
-        <div class="form-group">
-          <label>Color</label>
-          <input type="text" class="form-control"
-                 [(ngModel)]="petForm.color"
-                 name="color">
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label>Description</label>
-        <textarea class="form-control" rows="3"
-                  [(ngModel)]="petForm.description"
-                  name="description">
-        </textarea>
-      </div>
-
-      <div class="form-group">
-        <label>Upload Image</label>
-
-        <div class="upload-box" (click)="imageInput.click()">
-          <span>📎 Click to upload</span>
-        </div>
-
-        <input type="file" #imageInput hidden (change)="onImageSelected($event)">
-
-        <div class="preview mt-2" *ngIf="previewUrl">
-          <img [src]="previewUrl">
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label>Contact Info</label>
-        <input type="text" class="form-control"
-               [(ngModel)]="petForm.contact"
-               name="contact" required>
-      </div>
-
-      <button type="submit" class="btn-submit">Publish Pet</button>
-    </form>
-
-    <div *ngIf="submitted" class="success-msg">
-      <span>✅</span>
-      <div>
-        <strong>Pet added!</strong>
-        <p>Others can now see and adopt your pet 🐾</p>
-      </div>
-    </div>
-
+<div class="page-header-bar">
+  <div class="container d-flex justify-content-between align-items-center">
+    <h2 class="page-title">Have a Pet for Adoption</h2>
+    <button class="btn-open-modal" (click)="openModal()">+ List a pet</button>
   </div>
 </div>
+
+@if (showModal) {
+  <div class="modal-overlay" (click)="closeModal()">
+    <div class="modal-box" (click)="$event.stopPropagation()">
+      <button class="modal-close-btn" (click)="closeModal()">✕</button>
+
+      <div class="modal-header">
+        <span class="modal-icon">🏡</span>
+        <h3>List a Pet for Adoption</h3>
+        <p>Complete the form and your pet will be visible to potential adopters.</p>
+      </div>
+
+      @if (!submitted) {
+        <form (ngSubmit)="onSubmit()">
+          <div class="fp-group">
+            <label>Pet Name *</label>
+            <input class="fp-input" type="text" placeholder="e.g. Bella" [(ngModel)]="petForm.name" name="name">
+          </div>
+
+          <div class="fp-row-2">
+            <div class="fp-group">
+              <label>Type</label>
+              <select class="fp-select" [(ngModel)]="petForm.type" name="type">
+                <option>Dog</option>
+                <option>Cat</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="fp-group">
+              <label>Breed</label>
+              <input class="fp-input" type="text" placeholder="e.g. Labrador" [(ngModel)]="petForm.breed" name="breed">
+            </div>
+          </div>
+
+          <div class="fp-row-2">
+            <div class="fp-group">
+              <label>Age</label>
+              <input class="fp-input" type="text" placeholder="e.g. 2 years" [(ngModel)]="petForm.age" name="age">
+            </div>
+            <div class="fp-group">
+              <label>Color</label>
+              <input class="fp-input" type="text" placeholder="e.g. Golden" [(ngModel)]="petForm.color" name="color">
+            </div>
+          </div>
+
+          <div class="fp-group">
+            <label>Description</label>
+            <textarea class="fp-textarea" rows="3" placeholder="Personality, health, vaccinations..." [(ngModel)]="petForm.description" name="description"></textarea>
+          </div>
+
+          <div class="fp-group">
+            <label>Upload Image</label>
+            <div class="fp-upload" (click)="imageInput.click()">
+              <span class="up-icon">📎</span>
+              <span>Click to upload a photo</span>
+              <small>PNG, JPG up to 5MB</small>
+            </div>
+            <input type="file" #imageInput hidden (change)="onImageSelected($event)">
+            @if (previewUrl) {
+              <div class="fp-preview">
+                <img [src]="previewUrl">
+              </div>
+            }
+          </div>
+
+          <div class="fp-group">
+            <label>Contact Info *</label>
+            <input class="fp-input" type="text" placeholder="Phone or email" [(ngModel)]="petForm.contact" name="contact">
+          </div>
+
+          <button type="submit" class="fp-submit">Publish Pet</button>
+        </form>
+      }
+
+      @if (submitted) {
+        <div class="fp-success">
+          <span class="s-icon">✅</span>
+          <div>
+            <strong>Pet published!</strong>
+            <p>Others can now see and adopt your pet 🐾</p>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+}

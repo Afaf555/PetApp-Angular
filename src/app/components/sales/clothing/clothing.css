@@ -1,42 +1,118 @@
-.shop-wrapper {
-  background: #f7f4f0;
-  min-height: 100vh;
+/* =========================
+   PAGE WRAPPER
+========================= */
+
+.section-bg {
+  background: #f0f4f8;
+  width: 100%;
 }
 
+/* =========================
+   HEADER (FLEX BAR)
+========================= */
 
 .shop-header {
-  background: #2d4a47;
-  /*/padding: 100px 10px;/*/
-  padding-top: 90px;
-  padding-bottom: 40px;
-  text-align: center;
-  color: #fff;
-}
-.shop-header h2 {
-  font-size: 28px;
-  font-weight: 600;
-  margin-bottom: 4px;
+  background: #f0f4f8;
+  /*opacity: 70%;*/
+  /*background: #C17F4A;*/
+  padding: 90px 20px 50px;
   color: #fff;
 }
 
-.shop-header p {
+.shop-header-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.shop-title {
+  display: flex;
+  flex-direction: column;
+}
+
+.shop-title h2 {
+  font-size: 28px;
+  font-weight: 600;
+  margin: 0;
+  /*color: #fff;*/
+  /*color: #2d4a47;*/
+  color: #C17F4A;
+
+}
+
+.shop-title p {
   font-size: 14px;
   opacity: 0.85;
-  margin: 0;
-  color: #fff;
+  margin: 4px 0 0;
 }
+
+/* =========================
+   SEARCH BAR
+========================= */
+
+.search-bar {
+  position: relative;
+  width: 380px;
+}
+
+.search-bar input {
+  width: 100%;
+  padding: 12px 45px 12px 16px;
+  border-radius: 40px;
+  border: none;
+  font-size: 14px;
+  outline: none;
+  background: rgba(255,255,255,0.15);
+  color: white !important;
+  background: #C17F4A;
+  opacity: 61%;
+  /*opacity: 61%;*/
+}
+
+.search-bar input::placeholder {
+  color: rgba(255,255,255,0.7);
+  background: #C17F4A;
+  /*opacity: 61%;*/
+}
+
+.search-bar input:focus {
+  background: rgba(255,255,255,0.25);
+  background: #C17F4A;
+  /*opacity: 61%;*/
+}
+
+.search-icon {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 16px;
+}
+
+/* =========================
+   PRODUCT CARD
+========================= */
+
 .product-card {
   background: #fff;
   border-radius: 16px;
   overflow: hidden;
   border: 0.5px solid #e8d8c0;
-  transition: transform 0.2s ease;
+  transition: all 0.25s ease;
   height: 100%;
 }
 
 .product-card:hover {
-  transform: translateY(-4px);
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(193, 127, 74, 0.15);
 }
+
+/* =========================
+   IMAGE
+========================= */
 
 .product-img {
   height: 180px;
@@ -50,17 +126,25 @@
   object-fit: cover;
 }
 
+/* =========================
+   BADGE (BRONZE)
+========================= */
+
 .product-badge {
   position: absolute;
   top: 10px;
   left: 10px;
-  background: #a9683a;
+  background: #C17F4A;
   color: #fff;
   font-size: 11px;
   padding: 3px 10px;
   border-radius: 20px;
   font-weight: 500;
 }
+
+/* =========================
+   INFO
+========================= */
 
 .product-info {
   padding: 14px;
@@ -79,66 +163,66 @@
   margin-bottom: 12px;
 }
 
+/* =========================
+   FOOTER
+========================= */
+
 .product-footer {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
+/* =========================
+   PRICE (BRONZE)
+========================= */
+
 .product-price {
   font-size: 16px;
   font-weight: 600;
-  color: #a9683a;
+  color: #C17F4A;
 }
 
+/* =========================
+   BUTTON (BRONZE)
+========================= */
+
 .btn-add {
-  background: #a9683a;
+  background: #C17F4A;
   color: #fff;
   border: none;
   padding: 6px 14px;
   border-radius: 20px;
   font-size: 12px;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: all 0.2s ease;
 }
 
 .btn-add:hover {
-  background: #8a5230;
-}
-.search-bar {
-  position: relative;
-  max-width: 400px;
-  margin: 16px auto 0;
+  background: #a9683a;
+  transform: translateY(-1px);
 }
 
-.search-bar input {
-  width: 100%;
-  padding: 10px 40px 10px 16px;
-  border-radius: 40px;
-  border: none;
-  font-size: 14px;
-  outline: none;
-  background: rgba(255,255,255,0.15);
-  color: #fff;
-}
-
-.search-bar input::placeholder {
-  color: rgba(255,255,255,0.7);
-}
-
-.search-bar input:focus {
-  background: rgba(255,255,255,0.25);
-}
-
-.search-icon {
-  position: absolute;
-  right: 14px;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 16px;
-}
+/* =========================
+   EMPTY STATE
+========================= */
 
 .no-results {
   font-size: 16px;
   color: #888;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 768px) {
+  .shop-header-inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .search-bar {
+    width: 100%;
+  }
 }

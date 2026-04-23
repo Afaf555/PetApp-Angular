@@ -1,1 +1,120 @@
-<p>veterinarian works!</p>
+<!-- BACKGROUND WRAPPER -->
+<div class="section-bg">
+
+  <div class="form-wrapper py-5">
+
+    <!-- 🧑‍⚕️ VETS -->
+    <div class="vet-section">
+
+      <h2 class="text-center mb-3">Meet Our Veterinarians</h2>
+
+      <div class="vet-row">
+        <div class="vet-card" *ngFor="let vet of vets">
+
+          <div class="vet-img">
+            <img [src]="vet.image" [alt]="vet.name">
+          </div>
+
+          <div class="vet-info">
+            <h5>{{ vet.name }}</h5>
+            <p class="speciality">{{ vet.speciality }}</p>
+            <p class="desc">{{ vet.description }}</p>
+            <div class="rating">⭐ {{ vet.rating }}/5</div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+    <!-- 📝 FORM -->
+    <div class="report-card">
+
+      <div class="report-header">
+        <span class="report-icon">🏥</span>
+        <h2>Book Appointment</h2>
+        <p>Clinic: <strong>{{ clinicName }}</strong></p>
+      </div>
+
+      <form (ngSubmit)="onSubmit()">
+
+        <div class="form-group">
+          <label>Owner Name</label>
+          <input class="form-control"
+                 [(ngModel)]="appointmentForm.ownerName"
+                 name="ownerName" required>
+        </div>
+
+        <div class="form-group">
+          <label>Pet Name</label>
+          <input class="form-control"
+                 [(ngModel)]="appointmentForm.petName"
+                 name="petName">
+        </div>
+
+        <div class="form-group">
+          <label>Pet Type</label>
+          <select class="form-select"
+                  [(ngModel)]="appointmentForm.petType"
+                  name="petType">
+            <option>Dog</option>
+            <option>Cat</option>
+            <option>Other</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Service</label>
+          <select class="form-select"
+                  [(ngModel)]="appointmentForm.service"
+                  name="service">
+            <option>Check-up</option>
+            <option>Vaccination</option>
+            <option>Surgery</option>
+            <option>Grooming</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Date</label>
+          <input type="date"
+                 class="form-control"
+                 [(ngModel)]="appointmentForm.date"
+                 name="date" required>
+        </div>
+
+        <div class="form-group">
+          <label>Time</label>
+          <input type="time"
+                 class="form-control"
+                 [(ngModel)]="appointmentForm.time"
+                 name="time">
+        </div>
+
+        <div class="form-group">
+          <label>Contact</label>
+          <input class="form-control"
+                 [(ngModel)]="appointmentForm.contact"
+                 name="contact">
+        </div>
+
+        <button type="submit" class="btn-submit">
+          Book Appointment
+        </button>
+
+      </form>
+
+    </div>
+
+    <!-- SUCCESS -->
+    <div *ngIf="submitted" class="success-msg">
+      <span>✅</span>
+      <div>
+        <strong>Appointment booked!</strong>
+        <p>We will contact you soon 🐾</p>
+      </div>
+    </div>
+
+  </div>
+
+</div>

@@ -1,11 +1,23 @@
 <div class="shop-header">
-  <h2>💊 Supplements</h2>
-  <p>Keep your pet healthy and strong</p>
-  <div class="search-bar">
-    <input type="text" placeholder="Search products..." [(ngModel)]="searchQuery" (input)="filterProducts()" />
-    <span class="search-icon">🔍</span>
+  <div class="shop-header-inner">
+
+    <div class="shop-title">
+      <h2>Supplements</h2>
+      <!--      <p>Everything your pet needs to look and feel great</p>-->
+    </div>
+
+    <div class="search-bar">
+      <input type="text" placeholder="Search products..."
+             [(ngModel)]="searchQuery"
+             (input)="filterProducts()" />
+      <span class="search-icon">🔍</span>
+    </div>
+
   </div>
 </div>
+
+<div class="section-bg">
+
 
 <div class="container py-5">
   <div class="row g-4">
@@ -28,4 +40,5 @@
       </div>
     }
   </div>
+</div>
 </div>

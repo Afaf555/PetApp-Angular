@@ -1,0 +1,220 @@
+/* PAGE WRAPPER */
+.form-wrapper {
+  background: #f0f4f8;
+  padding: 50px 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 25px;
+}
+
+/* =========================
+   VETERINARIANS SECTION
+========================= */
+
+.vet-section {
+  width: 750px;
+  max-width: 100%;
+  text-align: center;
+}
+
+.vet-section h2 {
+  margin-top: 35px;
+  margin-bottom: 40px;
+  color:  #C17F4A;
+}
+
+/* ROW OF VETS */
+.vet-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+}
+
+/* VET CARD */
+.vet-card {
+  background: #fff;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid #e6e0d8;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  transition: 0.2s;
+  cursor: pointer;
+}
+
+.vet-card:hover {
+  transform: translateY(-5px);
+}
+
+.vet-img {
+  height: 210px;
+}
+
+.vet-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.vet-info {
+  padding: 10px;
+  text-align: center;
+}
+
+.vet-info h5 {
+  margin: 0;
+  font-size: 16px;
+  color: #333;
+}
+
+.speciality {
+  font-size: 13px;
+  color: #4a90d9;
+  margin: 4px 0;
+}
+
+.desc {
+  font-size: 12px;
+  color: #777;
+  margin-bottom: 5px;
+}
+
+.rating {
+  font-size: 13px;
+  color: #C17F4A;
+}
+
+/* =========================
+   FORM CARD
+========================= */
+
+.report-card {
+  margin-top: 20px;
+  background: #fff;
+  border-radius: 16px;
+  border: 1px solid #e6e0d8;
+  padding: 30px;
+  width: 750px;
+  max-width: 100%;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.06);
+}
+
+.report-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.report-icon {
+  font-size: 32px;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.report-header h2 {
+  font-size: 22px;
+  color: #C17F4A;
+  margin-bottom: 5px;
+}
+
+.report-header p {
+  font-size: 14px;
+  color: #777;
+}
+
+/* FORM */
+.form-group {
+  margin-bottom: 12px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 13px;
+  margin-bottom: 5px;
+  color: #444;
+}
+
+.form-control,
+.form-select {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  background: #fafafa;
+  font-size: 14px;
+  transition: 0.2s;
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color:#C17F4A;
+  background: #fff;
+  outline: none;
+}
+
+/* BUTTON */
+.btn-submit {
+  width: 100%;
+  background:  #C17F4A;
+  color: #fff;
+  border: none;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 15px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: 0.2s;
+}
+
+.btn-submit:hover {
+  background:#a9683a;
+}
+
+/* =========================
+   SUCCESS MESSAGE
+========================= */
+
+.success-msg {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #eef9f0;
+  border: 1px solid #bfe6c7;
+  padding: 14px;
+  border-radius: 10px;
+  width: 750px;
+  max-width: 100%;
+}
+
+.success-msg span {
+  font-size: 22px;
+}
+
+.success-msg strong {
+  display: block;
+  color: #2e7d32;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 900px) {
+  .vet-row {
+    grid-template-columns: 1fr;
+  }
+
+  .report-card,
+  .vet-section,
+  .success-msg {
+    width: 100%;
+  }
+}
+.section-bg {
+  background: #f0f4f8;
+  width: 100%;
+}
+
+.section-bg .container {
+  background: #f0f4f8;
+  border-radius: 16px;
+}
