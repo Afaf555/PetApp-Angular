@@ -17,65 +17,101 @@
       </div>
 
       @if (!submitted) {
-        <form (ngSubmit)="onSubmit()">
-          <div class="fp-group">
-            <label>Pet Name *</label>
-            <input class="fp-input" type="text" placeholder="e.g. Bella" [(ngModel)]="petForm.name" name="name">
-          </div>
+        <div class="modal-body-scroll">
+          <form id="haveForm" (ngSubmit)="onSubmit(form)" #form="ngForm">
 
-          <div class="fp-row-2">
             <div class="fp-group">
-              <label>Type</label>
-              <select class="fp-select" [(ngModel)]="petForm.type" name="type">
-                <option>Dog</option>
-                <option>Cat</option>
-                <option>Other</option>
-              </select>
+              <label>Pet Name *</label>
+              <input class="fp-input" type="text" placeholder="e.g. Bella"
+                     [(ngModel)]="petForm.name" name="name" required #name="ngModel">
+              @if (name.invalid && name.touched) {
+                <small class="err">Pet name is required</small>
+              }
             </div>
-            <div class="fp-group">
-              <label>Breed</label>
-              <input class="fp-input" type="text" placeholder="e.g. Labrador" [(ngModel)]="petForm.breed" name="breed">
-            </div>
-          </div>
 
-          <div class="fp-row-2">
-            <div class="fp-group">
-              <label>Age</label>
-              <input class="fp-input" type="text" placeholder="e.g. 2 years" [(ngModel)]="petForm.age" name="age">
-            </div>
-            <div class="fp-group">
-              <label>Color</label>
-              <input class="fp-input" type="text" placeholder="e.g. Golden" [(ngModel)]="petForm.color" name="color">
-            </div>
-          </div>
-
-          <div class="fp-group">
-            <label>Description</label>
-            <textarea class="fp-textarea" rows="3" placeholder="Personality, health, vaccinations..." [(ngModel)]="petForm.description" name="description"></textarea>
-          </div>
-
-          <div class="fp-group">
-            <label>Upload Image</label>
-            <div class="fp-upload" (click)="imageInput.click()">
-              <span class="up-icon">📎</span>
-              <span>Click to upload a photo</span>
-              <small>PNG, JPG up to 5MB</small>
-            </div>
-            <input type="file" #imageInput hidden (change)="onImageSelected($event)">
-            @if (previewUrl) {
-              <div class="fp-preview">
-                <img [src]="previewUrl">
+            <div class="fp-row-2">
+              <div class="fp-group">
+                <label>Type *</label>
+                <select class="fp-select" [(ngModel)]="petForm.type" name="type" required #type="ngModel">
+                  <option value="">-- Select --</option>
+                  <option>Dog</option>
+                  <option>Cat</option>
+                  <option>Other</option>
+                </select>
+                @if (type.invalid && type.touched) {
+                  <small class="err">Type is required</small>
+                }
               </div>
-            }
-          </div>
+              <div class="fp-group">
+                <label>Breed *</label>
+                <input class="fp-input" type="text" placeholder="e.g. Labrador"
+                       [(ngModel)]="petForm.breed" name="breed" required #breed="ngModel">
+                @if (breed.invalid && breed.touched) {
+                  <small class="err">Breed is required</small>
+                }
+              </div>
+            </div>
 
-          <div class="fp-group">
-            <label>Contact Info *</label>
-            <input class="fp-input" type="text" placeholder="Phone or email" [(ngModel)]="petForm.contact" name="contact">
-          </div>
+            <div class="fp-row-2">
+              <div class="fp-group">
+                <label>Age *</label>
+                <input class="fp-input" type="text" placeholder="e.g. 2 years"
+                       [(ngModel)]="petForm.age" name="age" required #age="ngModel">
+                @if (age.invalid && age.touched) {
+                  <small class="err">Age is required</small>
+                }
+              </div>
+              <div class="fp-group">
+                <label>Color *</label>
+                <input class="fp-input" type="text" placeholder="e.g. Golden"
+                       [(ngModel)]="petForm.color" name="color" required #color="ngModel">
+                @if (color.invalid && color.touched) {
+                  <small class="err">Color is required</small>
+                }
+              </div>
+            </div>
 
-          <button type="submit" class="fp-submit">Publish Pet</button>
-        </form>
+            <div class="fp-group">
+              <label>Description *</label>
+              <textarea class="fp-textarea" rows="2" placeholder="Personality, health, vaccinations..."
+                        [(ngModel)]="petForm.description" name="description" required #description="ngModel"></textarea>
+              @if (description.invalid && description.touched) {
+                <small class="err">Description is required</small>
+              }
+            </div>
+
+            <div class="fp-group">
+              <label>Upload Image</label>
+              <div class="fp-upload" (click)="imageInput.click()">
+                <span class="up-icon">📎</span>
+                <span>Click to upload a photo</span>
+                <small>PNG, JPG up to 5MB</small>
+              </div>
+              <input type="file" #imageInput hidden (change)="onImageSelected($event)">
+              @if (previewUrl) {
+                <div class="fp-preview">
+                  <img [src]="previewUrl">
+                </div>
+              }
+            </div>
+
+            <div class="fp-group">
+              <label>Contact Info *</label>
+              <input class="fp-input" type="text" placeholder="Phone or email"
+                     [(ngModel)]="petForm.contact" name="contact" required #contact="ngModel">
+              @if (contact.invalid && contact.touched) {
+                <small class="err">Contact info is required</small>
+              }
+            </div>
+
+          </form>
+        </div>
+
+        <div class="modal-footer-sticky">
+          <button type="submit" form="haveForm" class="fp-submit">
+            Publish Pet
+          </button>
+        </div>
       }
 
       @if (submitted) {
@@ -87,6 +123,7 @@
           </div>
         </div>
       }
+
     </div>
   </div>
 }

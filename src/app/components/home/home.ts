@@ -1,15 +1,15 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { NgClass } from '@angular/common';
-import { NgFor } from '@angular/common';
 
 @Component({
   selector: 'app-home',
-  imports: [RouterLink, NgClass, NgFor],  standalone:true,
+  standalone: true,
+  imports: [RouterLink, NgClass],
   templateUrl: './home.html',
   styleUrl: './home.css'
 })
-export class Home {
+export class Home implements OnInit {
   currentSlide = 0;
   visibleCount = 4;
 
@@ -69,8 +69,4 @@ export class Home {
     { id: 8, emoji: '🏥', topClass: 'sc-pink', tag: 'Vet care', tagClass: 'tag-vet', title: 'Bella\'s surgery was a success', description: 'Bella needed urgent care. Her owner booked a vet through PawPaw in minutes.', date: 'March 12, 2026' },
     { id: 9, emoji: '🐾', topClass: 'sc-teal', tag: 'Reunited', tagClass: 'tag-reunited', title: 'Coco back with her family', description: 'Coco escaped the yard but was found thanks to PawPaw community.', date: 'March 5, 2026' },
   ];
-  trackById(index: number, item: any) {
-    return item.id;
-  }
-
 }

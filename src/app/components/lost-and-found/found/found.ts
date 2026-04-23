@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation, ChangeDetectorRef } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-found',
@@ -19,10 +19,10 @@ export class Found {
 
   petForm = {
     name: '',
-    type: 'Dog',
+    type: '',
     breed: '',
     color: '',
-    gender: 'Male',
+    gender: '',
     location: '',
     date: '',
     description: '',
@@ -37,13 +37,11 @@ export class Found {
   ];
 
   get sortedPets() {
-    return [...this.foundPets].sort((a, b) => {
-      if (this.sortBy === 'newest') {
-        return new Date(b.date).getTime() - new Date(a.date).getTime();
-      } else {
-        return new Date(a.date).getTime() - new Date(b.date).getTime();
-      }
-    });
+    return [...this.foundPets].sort((a, b) =>
+      this.sortBy === 'newest'
+        ? new Date(b.date).getTime() - new Date(a.date).getTime()
+        : new Date(a.date).getTime() - new Date(b.date).getTime()
+    );
   }
 
   openModal() {
@@ -56,8 +54,8 @@ export class Found {
     this.showModal = false;
     this.submitted = false;
     this.petForm = {
-      name: '', type: 'Dog', breed: '', color: '',
-      gender: 'Male', location: '', date: '', description: '', contact: ''
+      name: '', type: '', breed: '', color: '',
+      gender: '', location: '', date: '', description: '', contact: ''
     };
     this.previewUrl = null;
     this.cdr.detectChanges();
@@ -75,7 +73,12 @@ export class Found {
     }
   }
 
-  onSubmit() {
+  onSubmit(form: NgForm) {
+    if (form.invalid) {
+      Object.values(form.controls).forEach(c => c.markAsTouched());
+      this.cdr.detectChanges();
+      return;
+    }
     this.submitted = true;
     this.cdr.detectChanges();
     setTimeout(() => this.closeModal(), 2500);

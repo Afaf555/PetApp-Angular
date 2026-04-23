@@ -17,57 +17,91 @@
       </div>
 
       @if (!submitted) {
-        <form (ngSubmit)="onSubmit()">
-          <div class="fp-group">
-            <label>Full Name *</label>
-            <input class="fp-input" type="text" [(ngModel)]="adoptForm.fullName" name="fullName" placeholder="Your full name">
-          </div>
+        <div class="modal-body-scroll">
+          <form id="wantForm" (ngSubmit)="onSubmit(form)" #form="ngForm">
 
-          <div class="fp-row-2">
-            <div class="fp-group">
-              <label>Email *</label>
-              <input class="fp-input" type="email" [(ngModel)]="adoptForm.email" name="email" placeholder="your@email.com">
+            <div class="fp-row-2">
+              <div class="fp-group">
+                <label>Full Name *</label>
+                <input class="fp-input" type="text" placeholder="Your full name"
+                       [(ngModel)]="adoptForm.fullName" name="fullName" required #fullName="ngModel">
+                @if (fullName.invalid && fullName.touched) {
+                  <small class="err">Full name is required</small>
+                }
+              </div>
+              <div class="fp-group">
+                <label>Email *</label>
+                <input class="fp-input" type="email" placeholder="your@email.com"
+                       [(ngModel)]="adoptForm.email" name="email" required #email="ngModel">
+                @if (email.invalid && email.touched) {
+                  <small class="err">Valid email is required</small>
+                }
+              </div>
             </div>
-            <div class="fp-group">
-              <label>Phone</label>
-              <input class="fp-input" type="text" [(ngModel)]="adoptForm.phone" name="phone" placeholder="+389...">
+
+            <div class="fp-row-2">
+              <div class="fp-group">
+                <label>Phone</label>
+                <input class="fp-input" type="text" placeholder="+389..."
+                       [(ngModel)]="adoptForm.phone" name="phone">
+              </div>
+              <div class="fp-group">
+                <label>Pet Type *</label>
+                <select class="fp-select" [(ngModel)]="adoptForm.petType" name="petType" required #petType="ngModel">
+                  <option value="">-- Select --</option>
+                  <option>Dog</option>
+                  <option>Cat</option>
+                  <option>Other</option>
+                </select>
+                @if (petType.invalid && petType.touched) {
+                  <small class="err">Pet type is required</small>
+                }
+              </div>
             </div>
-          </div>
 
-          <div class="fp-row-2">
-            <div class="fp-group">
-              <label>Pet Type</label>
-              <select class="fp-select" [(ngModel)]="adoptForm.petType" name="petType">
-                <option>Dog</option>
-                <option>Cat</option>
-                <option>Other</option>
-              </select>
+            <div class="fp-row-2">
+              <div class="fp-group">
+                <label>Living Situation *</label>
+                <select class="fp-select" [(ngModel)]="adoptForm.living" name="living" required #living="ngModel">
+                  <option value="">-- Select --</option>
+                  <option>Apartment</option>
+                  <option>House</option>
+                  <option>Farm</option>
+                </select>
+                @if (living.invalid && living.touched) {
+                  <small class="err">Living situation is required</small>
+                }
+              </div>
+              <div class="fp-group">
+                <label>Other pets? *</label>
+                <select class="fp-select" [(ngModel)]="adoptForm.otherPets" name="otherPets" required #otherPets="ngModel">
+                  <option value="">-- Select --</option>
+                  <option>No</option>
+                  <option>Yes</option>
+                </select>
+                @if (otherPets.invalid && otherPets.touched) {
+                  <small class="err">This field is required</small>
+                }
+              </div>
             </div>
+
             <div class="fp-group">
-              <label>Living Situation</label>
-              <select class="fp-select" [(ngModel)]="adoptForm.living" name="living">
-                <option>Apartment</option>
-                <option>House</option>
-                <option>Farm</option>
-              </select>
+              <label>Why do you want to adopt? *</label>
+              <textarea class="fp-textarea" rows="2" placeholder="Tell us your story..."
+                        [(ngModel)]="adoptForm.reason" name="reason" required #reason="ngModel"></textarea>
+              @if (reason.invalid && reason.touched) {
+                <small class="err">Please tell us your reason</small>
+              }
             </div>
-          </div>
 
-          <div class="fp-group">
-            <label>Do you have other pets?</label>
-            <select class="fp-select" [(ngModel)]="adoptForm.otherPets" name="otherPets">
-              <option>No</option>
-              <option>Yes</option>
-            </select>
-          </div>
+          </form>
+        </div>
 
-          <div class="fp-group">
-            <label>Why do you want to adopt?</label>
-            <textarea class="fp-textarea" rows="3" [(ngModel)]="adoptForm.reason" name="reason" placeholder="Tell us your story..."></textarea>
-          </div>
-
-          <button type="submit" class="fp-submit">Send Request</button>
-        </form>
+        <div class="modal-footer-sticky">
+          <button type="submit" form="wantForm" class="fp-submit">
+            Send Request
+          </button>
+        </div>
       }
 
       @if (submitted) {
@@ -79,11 +113,11 @@
           </div>
         </div>
       }
+
     </div>
   </div>
 }
 
-<!-- PET LIST -->
 <div class="pet-grid-section">
   <div class="container">
     <h3 class="text-center mb-4">Available Pets for Adoption</h3>

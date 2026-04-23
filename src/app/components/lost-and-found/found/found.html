@@ -18,55 +18,88 @@
 
       @if (!submitted) {
         <div class="modal-body-scroll">
-          <form (ngSubmit)="onSubmit()" id="foundPetForm">
+          <form id="foundForm" (ngSubmit)="onSubmit(form)" #form="ngForm">
+
             <div class="fp-group">
-              <label>Pet Name (if known)</label>
-              <input class="fp-input" type="text" placeholder="e.g. Bella" [(ngModel)]="petForm.name" name="name">
+              <label>Pet Name (if known) *</label>
+              <input class="fp-input" type="text" placeholder="e.g. Bella"
+                     [(ngModel)]="petForm.name" name="name" required #name="ngModel">
+              @if (name.invalid && name.touched) {
+                <small class="err">Name is required</small>
+              }
             </div>
 
             <div class="fp-row-2">
               <div class="fp-group">
-                <label>Type</label>
-                <select class="fp-select" [(ngModel)]="petForm.type" name="type">
+                <label>Type *</label>
+                <select class="fp-select" [(ngModel)]="petForm.type" name="type" required #type="ngModel">
+                  <option value="">-- Select --</option>
                   <option>Dog</option>
                   <option>Cat</option>
                   <option>Other</option>
                 </select>
+                @if (type.invalid && type.touched) {
+                  <small class="err">Type is required</small>
+                }
               </div>
               <div class="fp-group">
-                <label>Breed</label>
-                <input class="fp-input" type="text" placeholder="e.g. Labrador" [(ngModel)]="petForm.breed" name="breed">
+                <label>Breed *</label>
+                <input class="fp-input" type="text" placeholder="e.g. Labrador"
+                       [(ngModel)]="petForm.breed" name="breed" required #breed="ngModel">
+                @if (breed.invalid && breed.touched) {
+                  <small class="err">Breed is required</small>
+                }
               </div>
             </div>
 
             <div class="fp-row-2">
               <div class="fp-group">
-                <label>Color</label>
-                <input class="fp-input" type="text" placeholder="e.g. Golden" [(ngModel)]="petForm.color" name="color">
+                <label>Color *</label>
+                <input class="fp-input" type="text" placeholder="e.g. Golden"
+                       [(ngModel)]="petForm.color" name="color" required #color="ngModel">
+                @if (color.invalid && color.touched) {
+                  <small class="err">Color is required</small>
+                }
               </div>
               <div class="fp-group">
-                <label>Gender</label>
-                <select class="fp-select" [(ngModel)]="petForm.gender" name="gender">
+                <label>Gender *</label>
+                <select class="fp-select" [(ngModel)]="petForm.gender" name="gender" required #gender="ngModel">
+                  <option value="">-- Select --</option>
                   <option>Male</option>
                   <option>Female</option>
                   <option>Unknown</option>
                 </select>
+                @if (gender.invalid && gender.touched) {
+                  <small class="err">Gender is required</small>
+                }
               </div>
             </div>
 
             <div class="fp-group">
-              <label>Found Location</label>
-              <input class="fp-input" type="text" placeholder="City, street..." [(ngModel)]="petForm.location" name="location">
+              <label>Found Location *</label>
+              <input class="fp-input" type="text" placeholder="City, street..."
+                     [(ngModel)]="petForm.location" name="location" required #location="ngModel">
+              @if (location.invalid && location.touched) {
+                <small class="err">Location is required</small>
+              }
             </div>
 
             <div class="fp-group">
-              <label>Date Found</label>
-              <input class="fp-input" type="date" [(ngModel)]="petForm.date" name="date">
+              <label>Date Found *</label>
+              <input class="fp-input" type="date"
+                     [(ngModel)]="petForm.date" name="date" required #date="ngModel">
+              @if (date.invalid && date.touched) {
+                <small class="err">Date is required</small>
+              }
             </div>
 
             <div class="fp-group">
-              <label>Description</label>
-              <textarea class="fp-textarea" rows="3" placeholder="Details, behavior, collar..." [(ngModel)]="petForm.description" name="description"></textarea>
+              <label>Description *</label>
+              <textarea class="fp-textarea" rows="3" placeholder="Details, behavior, collar..."
+                        [(ngModel)]="petForm.description" name="description" required #description="ngModel"></textarea>
+              @if (description.invalid && description.touched) {
+                <small class="err">Description is required</small>
+              }
             </div>
 
             <div class="fp-group">
@@ -85,13 +118,21 @@
             </div>
 
             <div class="fp-group">
-              <label>Contact Info</label>
-              <input class="fp-input" type="text" placeholder="Phone or email" [(ngModel)]="petForm.contact" name="contact">
+              <label>Contact Info *</label>
+              <input class="fp-input" type="text" placeholder="Phone or email"
+                     [(ngModel)]="petForm.contact" name="contact" required #contact="ngModel">
+              @if (contact.invalid && contact.touched) {
+                <small class="err">Contact is required</small>
+              }
             </div>
+
           </form>
         </div>
+
         <div class="modal-footer-sticky">
-          <button type="submit" form="foundPetForm" class="fp-submit">Submit Report</button>
+          <button type="submit" form="foundForm" class="fp-submit">
+            Submit Report
+          </button>
         </div>
       }
 
@@ -104,6 +145,7 @@
           </div>
         </div>
       }
+
     </div>
   </div>
 }
@@ -120,7 +162,6 @@
         </select>
       </div>
     </div>
-
     <div class="row g-3">
       @for (pet of sortedPets; track pet.id) {
         <div class="col-6 col-md-3">

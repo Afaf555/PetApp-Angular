@@ -1,33 +1,18 @@
 <section class="hero-banner">
   <div class="container d-flex align-items-center justify-content-between flex-wrap py-5">
-
-    <!-- TEXT -->
     <div class="hero-content">
-      <h1 class="hero-title display-4 text-white fw-bold">
-        Treat Your Pet<br />like royalty!
-      </h1>
-
-
+      <h1 class="hero-title">Treat Your Pet<br />like royalty!</h1>
       <p class="text-hero mt-3">
         Find lost pets, adopt new friends, and take care of your pets in one place.
       </p>
-
       <div class="d-flex gap-3 mt-4 flex-wrap">
-        <button class="btn btn-sage px-4" routerLink="/lost-and-found/lost">
-          Find a lost pet
-        </button>
-
-        <button class="btn btn-outline-sage px-4" routerLink="/adoption/want">
-          Adopt a pet
-        </button>
+        <button class="btn btn-sage px-4" routerLink="/lost-and-found/lost">Find a lost pet</button>
+        <button class="btn btn-outline-sage px-4" routerLink="/adoption/want">Adopt a pet</button>
       </div>
     </div>
-
-    <!-- IMAGE -->
     <div class="hero-img-right">
       <img src="assets/images/hero.jpg" alt="pet hero" />
     </div>
-
   </div>
 </section>
 
@@ -41,7 +26,6 @@
         </div>
       </div>
       <div class="col-md-7">
-        <!--        <p class="mission-label">Our Mission</p>-->
         <h2 class="mission-title">What We Do</h2>
         <p class="mission-text">Our mission is to work with our clients to positively impact the quality of life for each pet that we look after. We are always continually raising the standard of excellence for pet care and client service.</p>
         <p class="mission-text">We believe every pet deserves a loving home and proper care. Through our platform we connect pet owners, adopters, and veterinarians to make that possible.</p>
@@ -50,62 +34,43 @@
   </div>
 </section>
 
-
-<!-- FEATURES -->
 <section class="py-5">
   <div class="container" id="dva">
-
     <h2 class="text-center mb-4" id="tekst">What can you do on PawPaw?</h2>
-
     <div class="row g-3">
-
       <div class="col-12 col-md-3">
         <div class="feature-card text-center p-4" routerLink="/lost-and-found/lost">
           <div class="feature-icon icon-purple mx-auto mb-3">🔍</div>
           <h5>Lost & Found</h5>
-          <p class="text-muted small">
-            Report or find lost pets quickly.
-          </p>
+          <p class="text-muted small">Report or find lost pets quickly.</p>
         </div>
       </div>
-
       <div class="col-12 col-md-3">
         <div class="feature-card text-center p-4" routerLink="/veterinarian">
           <div class="feature-icon icon-teal mx-auto mb-3">🏥</div>
           <h5>Veterinarian</h5>
-          <p class="text-muted small">
-            Book vet appointments easily.
-          </p>
+          <p class="text-muted small">Book vet appointments easily.</p>
         </div>
       </div>
-
       <div class="col-12 col-md-3">
         <div class="feature-card text-center p-4" routerLink="/sales/food">
           <div class="feature-icon icon-coral mx-auto mb-3">🛍️</div>
           <h5>Pet Shop</h5>
-          <p class="text-muted small">
-            Everything your pet needs.
-          </p>
+          <p class="text-muted small">Everything your pet needs.</p>
         </div>
       </div>
-
       <div class="col-12 col-md-3">
         <div class="feature-card text-center p-4" routerLink="/adoption/want">
           <div class="feature-icon icon-amber mx-auto mb-3">🏠</div>
           <h5>Adoption</h5>
-          <p class="text-muted small">
-            Give pets a loving home.
-          </p>
+          <p class="text-muted small">Give pets a loving home.</p>
         </div>
       </div>
-
     </div>
-
   </div>
 </section>
 
 <section class="howto-wrapper py-5">
-
   <div class="howto-section">
     <div class="howto-img-side">
       <img src="assets/images/pets2.jpg" alt="pet" />
@@ -147,9 +112,7 @@
     </div>
   </div>
 </section>
-<!-- STATS -->
 
-<!-- SUCCESS STORIES -->
 <section class="success-section">
   <div class="container">
     <div class="section-header">
@@ -158,12 +121,12 @@
     </div>
 
     <div class="carousel-wrapper">
-      <button class="carousel-btn carousel-prev" (click)="prevSlide()">&#8249;</button>
+      <button class="carousel-btn" (click)="prevSlide()">&#8249;</button>
 
       <div class="carousel-track-wrapper">
         <div class="carousel-track" [style.transform]="'translateX(-' + (currentSlide * slideWidth) + '%)'">
           @for (story of successStories; track story.id) {
-            <div class="carousel-item">
+            <div class="pawpaw-slide">
               <div class="success-card">
                 <div class="success-card-top" [ngClass]="story.topClass">
                   {{ story.emoji }}
@@ -180,7 +143,7 @@
         </div>
       </div>
 
-      <button class="carousel-btn carousel-next" (click)="nextSlide()">&#8250;</button>
+      <button class="carousel-btn" (click)="nextSlide()">&#8250;</button>
     </div>
 
     <div class="carousel-dots">

@@ -1,5 +1,5 @@
-import { Component, ViewEncapsulation, ChangeDetectorRef, OnInit } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { Component, ViewEncapsulation, ChangeDetectorRef } from '@angular/core';
+import { FormsModule, NgForm } from '@angular/forms';
 import { PetService } from '../../../services/pet';
 
 @Component({
@@ -9,7 +9,7 @@ import { PetService } from '../../../services/pet';
   styleUrl: './lost.css',
   encapsulation: ViewEncapsulation.None
 })
-export class Lost implements OnInit {
+export class Lost {
   formType = 'lost';
   submitted = false;
   showModal = false;
@@ -21,15 +21,22 @@ export class Lost implements OnInit {
 
   petForm = {
     name: '',
-    type: 'Dog',
+    type: '',
     breed: '',
     color: '',
-    gender: 'Male',
+    gender: '',
     location: '',
     date: '',
     description: '',
     contact: ''
   };
+
+  lostPetsStatic = [
+    { id: 1, name: 'Cony', age: '3 y.o.', description: 'loves to play', image: 'assets/images/cat3.jpg', date: '2026-04-22' },
+    { id: 2, name: 'Martin', age: '1 y.o.', description: 'mix of butter', image: 'assets/images/cat4.jpg', date: '2026-04-20' },
+    { id: 3, name: 'Max', age: '2 y.o.', description: 'loves making friends', image: 'assets/images/dog3.jpg', date: '2026-04-18' },
+    { id: 4, name: 'Lesley', age: '8 m.o.', description: 'loves walking freely', image: 'assets/images/dog4.jpg', date: '2026-04-15' },
+  ];
 
   ngOnInit() {
     this.loadLostPets();
@@ -38,10 +45,13 @@ export class Lost implements OnInit {
   loadLostPets() {
     this.petService.getLostPets().subscribe({
       next: (data) => {
-        this.lostPets = data;
+        this.lostPets = data.length > 0 ? data : this.lostPetsStatic;
         this.cdr.detectChanges();
       },
-      error: (err) => console.error(err)
+      error: () => {
+        this.lostPets = this.lostPetsStatic;
+        this.cdr.detectChanges();
+      }
     });
   }
 
@@ -63,8 +73,8 @@ export class Lost implements OnInit {
     this.showModal = false;
     this.submitted = false;
     this.petForm = {
-      name: '', type: 'Dog', breed: '', color: '',
-      gender: 'Male', location: '', date: '', description: '', contact: ''
+      name: '', type: '', breed: '', color: '',
+      gender: '', location: '', date: '', description: '', contact: ''
     };
     this.previewUrl = null;
     this.cdr.detectChanges();
@@ -93,7 +103,15 @@ export class Lost implements OnInit {
     }
   }
 
-  onSubmit() {
+  onSubmit(form: NgForm) {
+    if (form.invalid) {
+      Object.values(form.controls).forEach(control => {
+        control.markAsTouched();
+      });
+      this.cdr.detectChanges();
+      return;
+    }
+
     const pet = {
       ...this.petForm,
       status: 'lost',

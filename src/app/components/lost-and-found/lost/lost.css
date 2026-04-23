@@ -292,3 +292,29 @@ body > app-root > app-lost > div.lost-pets-section.py-5 > div {
   justify-content: center;
   padding-top: -10px;
 }
+.modal-body-scroll {
+  overflow-y: auto;
+  flex: 1;
+  padding: 24px 36px 8px;
+}
+
+.modal-footer-sticky {
+  padding: 16px 36px 24px;
+  background: #fff;
+  border-top: 1px solid #e5ddd5;
+  flex-shrink: 0;
+  border-radius: 0 0 20px 20px;
+}
+
+.err {
+  color: red;
+  font-size: 11px;
+  margin-top: 3px;
+  display: block;
+}
+
+.fp-input.ng-invalid.ng-touched,
+.fp-select.ng-invalid.ng-touched,
+.fp-textarea.ng-invalid.ng-touched {
+  border-color: red;
+}

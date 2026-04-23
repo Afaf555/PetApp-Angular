@@ -1,4 +1,3 @@
-<!-- BACKGROUND WRAPPER -->
 <div class="section-bg">
 
   <div class="form-wrapper py-5">
@@ -27,7 +26,7 @@
 
     </div>
 
-    <!-- 📝 FORM -->
+    <!-- 📝 FORM (ONLY ONE FORM!) -->
     <div class="report-card">
 
       <div class="report-header">
@@ -36,15 +35,23 @@
         <p>Clinic: <strong>{{ clinicName }}</strong></p>
       </div>
 
-      <form (ngSubmit)="onSubmit()">
+      <form (ngSubmit)="onSubmit()" #form="ngForm">
 
+        <!-- OWNER NAME -->
         <div class="form-group">
-          <label>Owner Name</label>
+          <label>Owner Name *</label>
           <input class="form-control"
                  [(ngModel)]="appointmentForm.ownerName"
-                 name="ownerName" required>
+                 name="ownerName"
+                 required
+                 #ownerName="ngModel">
+
+          @if (ownerName.invalid && ownerName.touched) {
+            <small style="color:red;">Owner name is required</small>
+          }
         </div>
 
+        <!-- PET NAME -->
         <div class="form-group">
           <label>Pet Name</label>
           <input class="form-control"
@@ -52,37 +59,59 @@
                  name="petName">
         </div>
 
+        <!-- PET TYPE -->
         <div class="form-group">
           <label>Pet Type</label>
           <select class="form-select"
                   [(ngModel)]="appointmentForm.petType"
-                  name="petType">
+                  name="petType"
+                  required
+                  #petType="ngModel">
             <option>Dog</option>
             <option>Cat</option>
             <option>Other</option>
           </select>
+
+          @if (petType.invalid && petType.touched) {
+            <small style="color:red;">Pet type is required</small>
+          }
         </div>
 
+        <!-- SERVICE -->
         <div class="form-group">
           <label>Service</label>
           <select class="form-select"
                   [(ngModel)]="appointmentForm.service"
-                  name="service">
+                  name="service"
+                  required
+                  #service="ngModel">
             <option>Check-up</option>
             <option>Vaccination</option>
             <option>Surgery</option>
             <option>Grooming</option>
           </select>
+
+          @if (service.invalid && service.touched) {
+            <small style="color:red;">Service is required</small>
+          }
         </div>
 
+        <!-- DATE -->
         <div class="form-group">
-          <label>Date</label>
+          <label>Date *</label>
           <input type="date"
                  class="form-control"
                  [(ngModel)]="appointmentForm.date"
-                 name="date" required>
+                 name="date"
+                 required
+                 #date="ngModel">
+
+          @if (date.invalid && date.touched) {
+            <small style="color:red;">Date is required</small>
+          }
         </div>
 
+        <!-- TIME -->
         <div class="form-group">
           <label>Time</label>
           <input type="time"
@@ -91,14 +120,24 @@
                  name="time">
         </div>
 
+        <!-- CONTACT -->
         <div class="form-group">
-          <label>Contact</label>
+          <label>Contact *</label>
           <input class="form-control"
                  [(ngModel)]="appointmentForm.contact"
-                 name="contact">
+                 name="contact"
+                 required
+                 #contact="ngModel">
+
+          @if (contact.invalid && contact.touched) {
+            <small style="color:red;">Contact is required</small>
+          }
         </div>
 
-        <button type="submit" class="btn-submit">
+        <!-- SUBMIT -->
+        <button type="submit"
+                class="btn-submit"
+                [disabled]="form.invalid">
           Book Appointment
         </button>
 
@@ -106,15 +145,18 @@
 
     </div>
 
-    <!-- SUCCESS -->
-    <div *ngIf="submitted" class="success-msg">
-      <span>✅</span>
-      <div>
-        <strong>Appointment booked!</strong>
-        <p>We will contact you soon 🐾</p>
+    @if (submitted) {
+      <div class="success-msg">
+        <span>✅</span>
+        <div>
+          <strong>Appointment booked!</strong>
+          <p>We will contact you soon 🐾</p>
+        </div>
       </div>
-    </div>
+    }
 
   </div>
 
 </div>
+
+<div id="map" ></div>

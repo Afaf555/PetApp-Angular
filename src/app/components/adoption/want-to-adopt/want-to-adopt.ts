@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 import { PetService } from '../../../services/pet';
 
 @Component({
@@ -18,9 +18,9 @@ export class WantToAdopt implements OnInit {
     fullName: '',
     email: '',
     phone: '',
-    petType: 'Dog',
-    living: 'Apartment',
-    otherPets: 'No',
+    petType: '',
+    living: '',
+    otherPets: '',
     reason: ''
   };
 
@@ -51,14 +51,15 @@ export class WantToAdopt implements OnInit {
     this.submitted = false;
     this.adoptForm = {
       fullName: '', email: '', phone: '',
-      petType: 'Dog', living: 'Apartment', otherPets: 'No', reason: ''
+      petType: '', living: '', otherPets: '', reason: ''
     };
     this.cdr.detectChanges();
   }
 
-  onSubmit() {
-    if (!this.adoptForm.fullName || !this.adoptForm.email) {
-      alert('Fill required fields!');
+  onSubmit(form: NgForm) {
+    if (form.invalid) {
+      Object.values(form.controls).forEach(c => c.markAsTouched());
+      this.cdr.detectChanges();
       return;
     }
 

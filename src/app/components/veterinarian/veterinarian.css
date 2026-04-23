@@ -217,4 +217,13 @@
 .section-bg .container {
   background: #f0f4f8;
   border-radius: 16px;
+
+}
+#map {
+  height: 450px;
+  width: 100%;
+  position: relative;
+  z-index: 0;
+  display: block;
+  clear: both;
 }

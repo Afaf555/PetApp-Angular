@@ -1,5 +1,6 @@
 .page-header-bar {
-  background: #f0ebe3;  padding: 90px 0 28px;
+  background: #f0ebe3;
+  padding: 90px 0 28px;
 }
 
 .page-title {
@@ -38,12 +39,13 @@
 .modal-box {
   background: #fff;
   border-radius: 20px;
-  padding: 36px;
   width: 100%;
   max-width: 560px;
   position: relative;
   max-height: 90vh;
-  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 }
 
 .modal-close-btn {
@@ -61,30 +63,48 @@
   align-items: center;
   justify-content: center;
   transition: background 0.2s;
+  z-index: 10;
 }
 
 .modal-close-btn:hover { background: #e5ddd5; }
 
 .modal-header {
   text-align: center;
-  margin-bottom: 24px;
-  padding-bottom: 20px;
+  padding: 24px 36px 16px;
   border-bottom: 1px solid #e5ddd5;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.modal-icon { font-size: 36px; display: block; margin-bottom: 10px; }
-.modal-header h3 { font-family: 'Playfair Display', serif; font-size: 22px; color: #094545; margin-bottom: 6px; }
-.modal-header p { font-size: 13px; color: #6b6b6b; }
+.modal-icon { font-size: 28px; display: block; margin-bottom: 6px; }
+.modal-header h3 { font-family: 'Playfair Display', serif; font-size: 18px; color: #094545; margin-bottom: 4px; }
+.modal-header p { font-size: 12px; color: #6b6b6b; margin: 0; }
 
-.fp-group { margin-bottom: 14px; }
-.fp-group label { display: block; font-size: 13px; font-weight: 600; color: #1a1a1a; margin-bottom: 5px; }
+.modal-body-scroll {
+  overflow-y: auto;
+  flex: 1;
+  padding: 16px 24px 8px;
+}
+
+.modal-footer-sticky {
+  padding: 12px 24px 16px;
+  background: #fff;
+  border-top: 1px solid #e5ddd5;
+  flex-shrink: 0;
+  border-radius: 0 0 20px 20px;
+}
+
+.fp-group { margin-bottom: 8px; }
+.fp-group label { display: block; font-size: 12px; font-weight: 600; color: #1a1a1a; margin-bottom: 3px; }
 
 .fp-input, .fp-select, .fp-textarea {
   width: 100%;
-  padding: 10px 13px;
+  padding: 7px 10px;
   border: 1.5px solid #e5ddd5;
-  border-radius: 10px;
-  font-size: 14px;
+  border-radius: 8px;
+  font-size: 13px;
   font-family: 'DM Sans', sans-serif;
   color: #1a1a1a;
   background: #fafafa;
@@ -99,32 +119,71 @@
   box-shadow: 0 0 0 3px rgba(169,104,58,0.1);
 }
 
-.fp-textarea { resize: vertical; min-height: 80px; }
+.fp-textarea { resize: none; min-height: 60px; }
+
+.fp-input.ng-invalid.ng-touched,
+.fp-select.ng-invalid.ng-touched,
+.fp-textarea.ng-invalid.ng-touched {
+  border-color: red;
+}
 
 .fp-row-2 {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 14px;
+  gap: 10px;
 }
 
 @media (max-width: 480px) { .fp-row-2 { grid-template-columns: 1fr; } }
+
+.fp-upload {
+  border: 2px dashed #d0c8c0;
+  border-radius: 8px;
+  padding: 12px;
+  text-align: center;
+  cursor: pointer;
+  background: #fafafa;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  color: #6b6b6b;
+  transition: all 0.2s;
+}
+
+.fp-upload:hover { border-color: #a9683a; color: #a9683a; }
+.up-icon { font-size: 18px; }
+.fp-upload span { font-size: 12px; font-weight: 500; }
+.fp-upload small { font-size: 10px; opacity: 0.7; }
+
+.fp-preview img {
+  max-width: 120px;
+  border-radius: 8px;
+  border: 1px solid #e5ddd5;
+  margin-top: 6px;
+}
 
 .fp-submit {
   width: 100%;
   background: #094545;
   color: #fff;
   border: none;
-  padding: 13px;
+  padding: 11px;
   border-radius: 10px;
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 600;
   font-family: 'DM Sans', sans-serif;
   cursor: pointer;
-  margin-top: 6px;
-  transition: background 0.2s, transform 0.15s;
+  transition: background 0.2s;
 }
 
-.fp-submit:hover { background: #1a6060; transform: translateY(-1px); }
+.fp-submit:hover { background: #1a6060; }
+
+.err {
+  color: red;
+  font-size: 10px;
+  margin-top: 2px;
+  display: block;
+}
 
 .fp-success {
   display: flex;
@@ -134,7 +193,7 @@
   border: 1px solid #b2dfb2;
   border-radius: 10px;
   padding: 16px 20px;
-  margin-top: 16px;
+  margin: 16px 24px;
 }
 
 .fp-success .s-icon { font-size: 28px; }
@@ -162,18 +221,8 @@
 
 .pet-grid-card:hover { transform: translateY(-5px); box-shadow: 0 8px 28px rgba(0,0,0,0.12); }
 
-.pet-grid-img {
-  height: 190px;
-  overflow: hidden;
-}
-
-.pet-grid-img img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.3s;
-}
-
+.pet-grid-img { height: 190px; overflow: hidden; }
+.pet-grid-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s; }
 .pet-grid-card:hover .pet-grid-img img { transform: scale(1.05); }
 
 .pet-grid-body { padding: 14px 16px; text-align: center; }
