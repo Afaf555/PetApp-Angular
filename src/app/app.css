@@ -1,5 +1,5 @@
 .navbar {
-/*/background: transparent !important;/*/
+/*//background: transparent !important;//*/
 background: #094545 !important;
   position: absolute;
   top: 0;
@@ -19,7 +19,7 @@ background: #094545 !important;
 
 .nav-link:hover {
   transform: scale(1.15);
-/*/border: 1px solid rgba(255, 255, 255, 0.4);/*/
+/*//border: 1px solid rgba(255, 255, 255, 0.4);//*/
 
 }
 .navbar-nav {
@@ -39,7 +39,7 @@ background: #094545 !important;
   background: #094545 !important;
   color: #fff;
   padding: 40px 0 15px;
-/*/margin-top: 40px;/*/
+/*//margin-top: 40px;//*/
 
 }
 
@@ -100,6 +100,7 @@ div.row{
 .white-paw {
   filter: grayscale(100%) brightness(200%);
 }
+
 .dropdown-menu.dropdown-menu-dark {
   background-color: #094545 !important;
   border: none;
@@ -112,4 +113,17 @@ div.row{
 .dropdown-menu.dropdown-menu-dark .dropdown-item:hover {
   background-color: #1a6060;
   color: #fff;
+}
+
+body > app-root > footer{
+  font-family: "Playfair Display", serif;
+}
+
+
+footer{
+  font-family:"DM Sans", serif;
+}
+
+nav{
+  font-family: "DM Sans", serif;
 }

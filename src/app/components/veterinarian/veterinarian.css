@@ -229,3 +229,14 @@
   margin: 0;
   padding: 0;
 }
+
+body{
+  font-family: "Playfair Display", serif important;
+}
+
+.vet-section{
+  font-family: "DM Sans", serif;
+}
+.report-card{
+  font-family: "DM Sans", serif;
+}

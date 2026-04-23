@@ -1,15 +1,17 @@
-import { Component } from '@angular/core';
-import { NgIf } from '@angular/common';
+import { Component, ChangeDetectorRef } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-food',
-  imports: [NgIf, FormsModule],
+  selector: 'app-accessories',
+  imports: [FormsModule],
   templateUrl: './accessories.html',
   styleUrl: './accessories.css'
 })
 export class Accessories {
   searchQuery = '';
+  showToast = false;
+
+  constructor(private cdr: ChangeDetectorRef) {}
 
   products = [
     { id: 1, name: 'Leather Collar', description: 'Durable leather collar for dogs', price: 14.99, badge: 'Best seller', image: 'assets/images/26351_trixie_bikeset_deluxe_dog_hs_21_2.jpg' },
@@ -21,6 +23,7 @@ export class Accessories {
     { id: 7, name: 'Smart Automatic Feeder', description: 'Double bowl with automatic features', price: 55.99, badge: 'New', image: 'assets/images/546800_platrixie_futterautomat_tx_c_smart_ersatz_doppelnapf_hs_01_0.jpg' },
     { id: 8, name: 'Pet Couch Cushion', description: 'Couch Cushion - Grey', price: 28.99, badge: null, image: 'assets/images/610696_610697_pla_kerbl_pet_couchkissen_emalia_grau_hs_01_1.jpg' },
   ];
+
   filteredProducts = [...this.products];
 
   filterProducts() {
@@ -29,5 +32,14 @@ export class Accessories {
       p.name.toLowerCase().includes(query) ||
       p.description.toLowerCase().includes(query)
     );
+  }
+
+  addToCart(product: any) {
+    this.showToast = true;
+    this.cdr.detectChanges();
+    setTimeout(() => {
+      this.showToast = false;
+      this.cdr.detectChanges();
+    }, 3000);
   }
 }

@@ -222,7 +222,7 @@
   padding: 7px 20px;
   border-radius: 40px;
   font-size: 13px;
-  font-family: "Playfair Display", serif;
+  font-family: "DM Sans", serif;
   font-weight: 500;
   cursor: pointer;
   transition: background 0.2s;
@@ -255,7 +255,7 @@
   border: 1.5px solid #e5ddd5;
   border-radius: 40px;
   font-size: 14px;
-  font-family: "Playfair Display", serif;
+  font-family: "DM Sans", serif;
   color: #1a1a1a;
   background: #fff;
   outline: none;
@@ -318,3 +318,4 @@ body > app-root > app-lost > div.lost-pets-section.py-5 > div {
 .fp-textarea.ng-invalid.ng-touched {
   border-color: red;
 }
+

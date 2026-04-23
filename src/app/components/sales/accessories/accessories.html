@@ -1,22 +1,27 @@
 <div class="shop-header">
   <div class="shop-header-inner">
-
     <div class="shop-title">
       <h2>Accessories</h2>
-      <!--      <p>Everything your pet needs to look and feel great</p>-->
     </div>
-
     <div class="search-bar">
       <input type="text" placeholder="Search products..."
              [(ngModel)]="searchQuery"
              (input)="filterProducts()" />
       <span class="search-icon">🔍</span>
     </div>
-
   </div>
 </div>
 
-<!-- BACKGROUND WRAPPER -->
+@if (showToast) {
+  <div class="toast-popup">
+    <span>🛒</span>
+    <div>
+      <strong>Available in store!</strong>
+      <p>Visit us to get this product 🐾</p>
+    </div>
+  </div>
+}
+
 <div class="section-bg">
   <div class="container py-5">
     <div class="row g-4">
@@ -25,18 +30,16 @@
           <div class="product-card">
             <div class="product-img">
               <img [src]="product.image" [alt]="product.name" />
-              <span class="product-badge" *ngIf="product.badge">
-                {{ product.badge }}
-              </span>
+              @if (product.badge) {
+                <span class="product-badge">{{ product.badge }}</span>
+              }
             </div>
-
             <div class="product-info">
               <h6>{{ product.name }}</h6>
               <p>{{ product.description }}</p>
-
               <div class="product-footer">
                 <span class="product-price">${{ product.price }}</span>
-                <button class="btn-add">Add to cart</button>
+                <button class="btn-add" (click)="addToCart(product)">See availability</button>
               </div>
             </div>
           </div>

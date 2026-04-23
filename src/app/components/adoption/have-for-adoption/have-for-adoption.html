@@ -108,9 +108,7 @@
         </div>
 
         <div class="modal-footer-sticky">
-          <button type="submit" form="haveForm" class="fp-submit">
-            Publish Pet
-          </button>
+          <button type="submit" form="haveForm" class="fp-submit">Publish Pet</button>
         </div>
       }
 
@@ -127,3 +125,46 @@
     </div>
   </div>
 }
+
+<!-- CAROUSEL -->
+<section class="adopted-section">
+  <div class="container">
+    <div class="section-header">
+      <h2>Pets That Found a Home</h2>
+      <p>Thanks to people like you, these pets found their forever families 🐾</p>
+    </div>
+
+    <div class="carousel-wrapper">
+      <button class="carousel-btn" (click)="prevSlide()">&#8249;</button>
+
+      <div class="carousel-track-wrapper">
+        <div class="carousel-track" [style.transform]="'translateX(-' + (currentSlide * slideWidth) + '%)'">
+          @for (story of adoptedStories; track story.id) {
+            <div class="pawpaw-slide">
+              <div class="success-card">
+                <div class="success-card-image">
+                  <img [src]="story.image" [alt]="story.title">
+                  <span class="emoji-overlay">{{ story.emoji }}</span>
+                </div>
+                <div class="success-card-body">
+                  <span class="success-tag" [ngClass]="story.tagClass">{{ story.tag }}</span>
+                  <h6>{{ story.title }}</h6>
+                  <p>{{ story.description }}</p>
+                  <small>{{ story.date }}</small>
+                </div>
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+
+      <button class="carousel-btn" (click)="nextSlide()">&#8250;</button>
+    </div>
+
+    <div class="carousel-dots">
+      @for (dot of dots; track dot) {
+        <span class="carousel-dot" [class.active]="dot === currentSlide" (click)="goToSlide(dot)"></span>
+      }
+    </div>
+  </div>
+</section>

@@ -1,16 +1,17 @@
-import { Component } from '@angular/core';
-import { NgIf } from '@angular/common';
+import { Component, ChangeDetectorRef } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-food',
-  imports: [NgIf, FormsModule],
+  selector: 'app-supplements-shop',
+  imports: [FormsModule],
   templateUrl: './supplements.html',
   styleUrl: './supplements.css'
 })
-
 export class Supplements {
   searchQuery = '';
+  showToast = false;
+
+  constructor(private cdr: ChangeDetectorRef) {}
 
   products = [
     { id: 1, name: 'Omega-3 Fish Oil', description: 'Supports coat and skin health', price: 19.99, badge: 'Best seller', image: 'assets/images/flexadin.webp' },
@@ -22,6 +23,7 @@ export class Supplements {
     { id: 7, name: 'Immunity Boost', description: 'Strengthens immune system', price: 26.99, badge: 'New', image: 'assets/images/Allergy_Immune_Supplement_for_Dogs.jpg' },
     { id: 8, name: 'Senior Formula', description: 'Special care for older pets', price: 29.99, badge: null, image: 'assets/images/8_Best_Eye_Supplements_for_Vizslas.jpg' },
   ];
+
   filteredProducts = [...this.products];
 
   filterProducts() {
@@ -30,5 +32,14 @@ export class Supplements {
       p.name.toLowerCase().includes(query) ||
       p.description.toLowerCase().includes(query)
     );
+  }
+
+  addToCart(product: any) {
+    this.showToast = true;
+    this.cdr.detectChanges();
+    setTimeout(() => {
+      this.showToast = false;
+      this.cdr.detectChanges();
+    }, 3000);
   }
 }

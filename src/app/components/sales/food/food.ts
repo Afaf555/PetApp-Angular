@@ -1,16 +1,17 @@
-import { Component } from '@angular/core';
-import { NgIf } from '@angular/common';
+import { Component, ChangeDetectorRef } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-food',
-  imports: [NgIf, FormsModule],
+  imports: [FormsModule],
   templateUrl: './food.html',
   styleUrl: './food.css'
 })
-
 export class Food {
   searchQuery = '';
+  showToast = false;
+
+  constructor(private cdr: ChangeDetectorRef) {}
 
   products = [
     { id: 1, name: 'Royal Canin Adult', description: 'Complete dry food for adult dogs', price: 24.99, badge: 'Best seller', image: 'assets/images/royalcaninadult.jpg' },
@@ -31,5 +32,14 @@ export class Food {
       p.name.toLowerCase().includes(query) ||
       p.description.toLowerCase().includes(query)
     );
+  }
+
+  addToCart(product: any) {
+    this.showToast = true;
+    this.cdr.detectChanges();
+    setTimeout(() => {
+      this.showToast = false;
+      this.cdr.detectChanges();
+    }, 3000);
   }
 }

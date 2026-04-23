@@ -6,6 +6,7 @@ import { FormsModule, NgForm } from '@angular/forms';
   imports: [FormsModule],
   templateUrl: './found.html',
   styleUrl: './found.css',
+  standalone: true,
   encapsulation: ViewEncapsulation.None
 })
 export class Found {
@@ -31,9 +32,9 @@ export class Found {
 
   foundPets = [
     { id: 1, name: 'Unknown', age: '~2 y.o.', description: 'found near city park', image: 'assets/images/cat.jpg', date: '2026-04-22' },
-    { id: 2, name: 'Unknown', age: '~1 y.o.', description: 'found on main street', image: 'assets/images/dog14.webp', date: '2026-04-20' },
-    { id: 3, name: 'Unknown', age: '~3 y.o.', description: 'found near school', image: 'assets/images/dog8.webp', date: '2026-04-15' },
-    { id: 4, name: 'Unknown', age: '~5 y.o.', description: 'found in neighborhood', image: 'assets/images/dog15.webp', date: '2026-04-10' },
+    { id: 2, name: 'Unknown', age: '~1 y.o.', description: 'found on main street', image: 'assets/images/dog14.jpg', date: '2026-04-20' },
+    { id: 3, name: 'Unknown', age: '~3 y.o.', description: 'found near school', image: 'assets/images/dog8.jpg', date: '2026-04-15' },
+    { id: 4, name: 'Unknown', age: '~5 y.o.', description: 'found in neighborhood', image: 'assets/images/dog15.jpg', date: '2026-04-10' },
   ];
 
   get sortedPets() {

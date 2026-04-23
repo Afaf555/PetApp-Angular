@@ -1,20 +1,10 @@
-/* =========================
-   PAGE WRAPPER
-========================= */
-
 .section-bg {
   background: #f0f4f8;
   width: 100%;
 }
 
-/* =========================
-   HEADER (FLEX BAR)
-========================= */
-
 .shop-header {
   background: #f0f4f8;
-  /*opacity: 70%;*/
-  /*background: #C17F4A;*/
   padding: 90px 20px 50px;
   color: #fff;
 }
@@ -28,30 +18,14 @@
   margin: 0 auto;
 }
 
-.shop-title {
-  display: flex;
-  flex-direction: column;
-}
+.shop-title { display: flex; flex-direction: column; }
 
 .shop-title h2 {
   font-size: 28px;
   font-weight: 600;
   margin: 0;
-  /*color: #fff;*/
-  /*color: #2d4a47;*/
   color: #C17F4A;
-
 }
-
-.shop-title p {
-  font-size: 14px;
-  opacity: 0.85;
-  margin: 4px 0 0;
-}
-
-/* =========================
-   SEARCH BAR
-========================= */
 
 .search-bar {
   position: relative;
@@ -65,24 +39,13 @@
   border: none;
   font-size: 14px;
   outline: none;
-  background: rgba(255,255,255,0.15);
-  color: white !important;
   background: #C17F4A;
   opacity: 61%;
-  /*opacity: 61%;*/
+  color: white;
 }
 
-.search-bar input::placeholder {
-  color: rgba(255,255,255,0.7);
-  background: #C17F4A;
-  /*opacity: 61%;*/
-}
-
-.search-bar input:focus {
-  background: rgba(255,255,255,0.25);
-  background: #C17F4A;
-  /*opacity: 61%;*/
-}
+.search-bar input::placeholder { color: rgba(255,255,255,0.7); }
+.search-bar input:focus { background: #C17F4A; }
 
 .search-icon {
   position: absolute;
@@ -91,10 +54,6 @@
   transform: translateY(-50%);
   font-size: 16px;
 }
-
-/* =========================
-   PRODUCT CARD
-========================= */
 
 .product-card {
   background: #fff;
@@ -107,12 +66,8 @@
 
 .product-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 10px 25px rgba(193, 127, 74, 0.15);
+  box-shadow: 0 10px 25px rgba(193,127,74,0.15);
 }
-
-/* =========================
-   IMAGE
-========================= */
 
 .product-img {
   height: 180px;
@@ -126,10 +81,6 @@
   object-fit: cover;
 }
 
-/* =========================
-   BADGE (BRONZE)
-========================= */
-
 .product-badge {
   position: absolute;
   top: 10px;
@@ -142,30 +93,9 @@
   font-weight: 500;
 }
 
-/* =========================
-   INFO
-========================= */
-
-.product-info {
-  padding: 14px;
-}
-
-.product-info h6 {
-  font-size: 14px;
-  font-weight: 600;
-  color: #1a1a1a;
-  margin-bottom: 4px;
-}
-
-.product-info p {
-  font-size: 12px;
-  color: #888;
-  margin-bottom: 12px;
-}
-
-/* =========================
-   FOOTER
-========================= */
+.product-info { padding: 14px; }
+.product-info h6 { font-size: 14px; font-weight: 600; color: #1a1a1a; margin-bottom: 4px; }
+.product-info p { font-size: 12px; color: #888; margin-bottom: 12px; }
 
 .product-footer {
   display: flex;
@@ -173,19 +103,7 @@
   justify-content: space-between;
 }
 
-/* =========================
-   PRICE (BRONZE)
-========================= */
-
-.product-price {
-  font-size: 16px;
-  font-weight: 600;
-  color: #C17F4A;
-}
-
-/* =========================
-   BUTTON (BRONZE)
-========================= */
+.product-price { font-size: 16px; font-weight: 600; color: #C17F4A; }
 
 .btn-add {
   background: #C17F4A;
@@ -198,31 +116,36 @@
   transition: all 0.2s ease;
 }
 
-.btn-add:hover {
-  background: #a9683a;
-  transform: translateY(-1px);
-}
+.btn-add:hover { background: #a9683a; transform: translateY(-1px); }
 
-/* =========================
-   EMPTY STATE
-========================= */
-
-.no-results {
-  font-size: 16px;
-  color: #888;
-}
-
-/* =========================
-   RESPONSIVE
-========================= */
+.no-results { font-size: 16px; color: #888; }
 
 @media (max-width: 768px) {
-  .shop-header-inner {
-    flex-direction: column;
-    align-items: flex-start;
-  }
+  .shop-header-inner { flex-direction: column; align-items: flex-start; }
+  .search-bar { width: 100%; }
+}
 
-  .search-bar {
-    width: 100%;
-  }
+.toast-popup {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background: #094545;
+  color: #fff;
+  padding: 16px 22px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  z-index: 9999;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+  animation: slideIn 0.3s ease;
+}
+
+.toast-popup span { font-size: 24px; }
+.toast-popup strong { display: block; font-size: 14px; }
+.toast-popup p { margin: 0; font-size: 12px; opacity: 0.85; }
+
+@keyframes slideIn {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
 }

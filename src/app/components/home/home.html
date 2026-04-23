@@ -73,7 +73,7 @@
 <section class="howto-wrapper py-5">
   <div class="howto-section">
     <div class="howto-img-side">
-      <img src="assets/images/pets2.jpg" alt="pet" />
+      <img src="assets/images/download_3.jpg" alt="pet" />
     </div>
     <div class="howto-content">
       <p class="howto-label">How it works</p>
@@ -128,8 +128,9 @@
           @for (story of successStories; track story.id) {
             <div class="pawpaw-slide">
               <div class="success-card">
-                <div class="success-card-top" [ngClass]="story.topClass">
+                <div class="success-card-image">
                   <img [src]="story.image" [alt]="story.title">
+                  <span class="emoji-overlay">{{ story.emoji }}</span>
                 </div>
                 <div class="success-card-body">
                   <span class="success-tag" [ngClass]="story.tagClass">{{ story.tag }}</span>

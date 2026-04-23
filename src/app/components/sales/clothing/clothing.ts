@@ -1,15 +1,17 @@
-import { Component } from '@angular/core';
-import { NgIf } from '@angular/common';
+import { Component, ChangeDetectorRef } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-food',
-  imports: [NgIf, FormsModule],
+  selector: 'app-clothing-shop',
+  imports: [FormsModule],
   templateUrl: './clothing.html',
   styleUrl: './clothing.css'
 })
 export class Clothing {
   searchQuery = '';
+  showToast = false;
+
+  constructor(private cdr: ChangeDetectorRef) {}
 
   products = [
     { id: 1, name: 'Winter Jacket', description: 'Warm fleece jacket for small dogs', price: 22.99, badge: 'Best seller', image: 'assets/images/cloth1.jpg' },
@@ -21,6 +23,7 @@ export class Clothing {
     { id: 7, name: 'Pyjama Set', description: 'Soft cotton pyjamas for pets', price: 18.99, badge: 'New', image: 'assets/images/cloth7.jpg' },
     { id: 8, name: 'Halloween Costume', description: 'Fun costume for special occasions', price: 21.99, badge: null, image: 'assets/images/cloth8.jpg' },
   ];
+
   filteredProducts = [...this.products];
 
   filterProducts() {
@@ -29,5 +32,14 @@ export class Clothing {
       p.name.toLowerCase().includes(query) ||
       p.description.toLowerCase().includes(query)
     );
+  }
+
+  addToCart(product: any) {
+    this.showToast = true;
+    this.cdr.detectChanges();
+    setTimeout(() => {
+      this.showToast = false;
+      this.cdr.detectChanges();
+    }, 3000);
   }
 }
