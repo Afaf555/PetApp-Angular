@@ -15,6 +15,7 @@ export class PetService {
   savePet(pet: any): Observable<any> {
     return this.http.post(this.api, pet);
   }
+
   saveAdoptionRequest(request: any): Observable<any> {
     return this.http.post(`${this.api}/adoption-requests`, request);
   }
@@ -22,11 +23,20 @@ export class PetService {
   getAdoptionRequests(): Observable<any[]> {
     return this.http.get<any[]>(`${this.api}/adoption-requests`);
   }
+
   getLostPets(): Observable<any[]> {
     return this.http.get<any[]>(`${this.api}/lost`);
   }
 
   saveLostPet(pet: any): Observable<any> {
+    return this.http.post(this.api, pet);
+  }
+
+  getFoundPets(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.api}/found`);
+  }
+
+  saveFoundPet(pet: any): Observable<any> {
     return this.http.post(this.api, pet);
   }
 }
