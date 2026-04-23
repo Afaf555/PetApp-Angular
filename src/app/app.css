@@ -100,3 +100,16 @@ div.row{
 .white-paw {
   filter: grayscale(100%) brightness(200%);
 }
+.dropdown-menu.dropdown-menu-dark {
+  background-color: #094545 !important;
+  border: none;
+}
+
+.dropdown-menu.dropdown-menu-dark .dropdown-item {
+  color: #fff;
+}
+
+.dropdown-menu.dropdown-menu-dark .dropdown-item:hover {
+  background-color: #1a6060;
+  color: #fff;
+}

@@ -55,9 +55,18 @@ export class Veterinarian implements AfterViewInit {
     setTimeout(() => {
       const mapEl = document.getElementById('map');
       if (!mapEl || this.mapInstance) return;
-
-      // Исчисти го div-от ако веќе има содржина
       (mapEl as any)._leaflet_id = null;
+
+      // ФИКС ЗА DEFAULT ИКОНИ
+      const iconDefault = L.icon({
+        iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
+        iconRetinaUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png',
+        shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
+        iconSize: [25, 41],
+        iconAnchor: [12, 41],
+        popupAnchor: [1, -34],
+      });
+      L.Marker.prototype.options.icon = iconDefault;
 
       this.mapInstance = L.map('map').setView([41.9981, 21.4254], 13);
 

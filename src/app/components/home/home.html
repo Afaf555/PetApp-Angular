@@ -129,7 +129,7 @@
             <div class="pawpaw-slide">
               <div class="success-card">
                 <div class="success-card-top" [ngClass]="story.topClass">
-                  {{ story.emoji }}
+                  <img [src]="story.image" [alt]="story.title">
                 </div>
                 <div class="success-card-body">
                   <span class="success-tag" [ngClass]="story.tagClass">{{ story.tag }}</span>
