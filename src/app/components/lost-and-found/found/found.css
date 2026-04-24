@@ -319,3 +319,9 @@ body > app-root > app-lost > div.lost-pets-section.py-5 > div {
   border-color: red;
 }
 
+.contact-hint {
+  font-size: 12px;
+  color: #a9683a !important;
+  font-style: italic;
+  margin: 0;
+}

@@ -13,12 +13,26 @@
       <div class="modal-header">
         <span class="modal-icon">🐶</span>
         <h3>Adoption Request</h3>
-        <p>Tell us about yourself and what kind of pet you're looking for.</p>
+        @if (selectedPet) {
+          <p>You are applying to adopt <strong>{{ selectedPet.name }}</strong> — {{ selectedPet.type }}</p>
+        } @else {
+          <p>Tell us about yourself and what kind of pet you're looking for.</p>
+        }
       </div>
 
       @if (!submitted) {
         <div class="modal-body-scroll">
           <form id="wantForm" (ngSubmit)="onSubmit(form)" #form="ngForm">
+
+            @if (selectedPet) {
+              <div class="pet-prefill-banner">
+                <img [src]="selectedPet.image" [alt]="selectedPet.name">
+                <div>
+                  <strong>{{ selectedPet.name }}</strong>
+                  <span>{{ selectedPet.age }}, {{ selectedPet.description }}</span>
+                </div>
+              </div>
+            }
 
             <div class="fp-row-2">
               <div class="fp-group">
@@ -47,14 +61,19 @@
               </div>
               <div class="fp-group">
                 <label>Pet Type *</label>
-                <select class="fp-select" [(ngModel)]="adoptForm.petType" name="petType" required #petType="ngModel">
-                  <option value="">-- Select --</option>
-                  <option>Dog</option>
-                  <option>Cat</option>
-                  <option>Other</option>
-                </select>
-                @if (petType.invalid && petType.touched) {
-                  <small class="err">Pet type is required</small>
+                @if (selectedPet) {
+                  <input class="fp-input" [value]="adoptForm.petType" name="petType" readonly
+                         style="background:#f0ebe3; cursor:not-allowed;">
+                } @else {
+                  <select class="fp-select" [(ngModel)]="adoptForm.petType" name="petType" required #petType="ngModel">
+                    <option value="">-- Select --</option>
+                    <option>Dog</option>
+                    <option>Cat</option>
+                    <option>Other</option>
+                  </select>
+                  @if (petType.invalid && petType.touched) {
+                    <small class="err">Pet type is required</small>
+                  }
                 }
               </div>
             </div>
@@ -98,9 +117,7 @@
         </div>
 
         <div class="modal-footer-sticky">
-          <button type="submit" form="wantForm" class="fp-submit">
-            Send Request
-          </button>
+          <button type="submit" form="wantForm" class="fp-submit">Send Request</button>
         </div>
       }
 
@@ -131,7 +148,7 @@
             <div class="pet-grid-body">
               <h6>{{ pet.name }}</h6>
               <p>{{ pet.age }}, {{ pet.description }}</p>
-              <button class="btn-pet">Adopt 🐾</button>
+              <button class="btn-pet" (click)="openModalForPet(pet)">Adopt 🐾</button>
             </div>
           </div>
         </div>

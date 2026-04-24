@@ -243,3 +243,31 @@
 }
 
 .btn-pet:hover { background: #8a5230; }
+.pet-prefill-banner {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #f0ebe3;
+  border-radius: 10px;
+  padding: 10px 14px;
+  margin-bottom: 12px;
+}
+
+.pet-prefill-banner img {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #a9683a;
+}
+
+.pet-prefill-banner strong {
+  display: block;
+  font-size: 14px;
+  color: #094545;
+}
+
+.pet-prefill-banner span {
+  font-size: 12px;
+  color: #6b6b6b;
+}

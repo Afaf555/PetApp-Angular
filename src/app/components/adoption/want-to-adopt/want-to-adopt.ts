@@ -13,6 +13,7 @@ export class WantToAdopt implements OnInit {
   submitted = false;
   showModal = false;
   pets: any[] = [];
+  selectedPet: any = null;
 
   adoptForm = {
     fullName: '',
@@ -41,6 +42,23 @@ export class WantToAdopt implements OnInit {
   }
 
   openModal() {
+    this.selectedPet = null;
+    this.showModal = true;
+    this.submitted = false;
+    this.cdr.detectChanges();
+  }
+
+  openModalForPet(pet: any) {
+    this.selectedPet = pet;
+    this.adoptForm = {
+      fullName: '',
+      email: '',
+      phone: '',
+      petType: pet.type || 'Dog',
+      living: '',
+      otherPets: '',
+      reason: ''
+    };
     this.showModal = true;
     this.submitted = false;
     this.cdr.detectChanges();
@@ -49,6 +67,7 @@ export class WantToAdopt implements OnInit {
   closeModal() {
     this.showModal = false;
     this.submitted = false;
+    this.selectedPet = null;
     this.adoptForm = {
       fullName: '', email: '', phone: '',
       petType: '', living: '', otherPets: '', reason: ''
@@ -63,7 +82,13 @@ export class WantToAdopt implements OnInit {
       return;
     }
 
-    this.petService.saveAdoptionRequest(this.adoptForm).subscribe({
+    const request = {
+      ...this.adoptForm,
+      petName: this.selectedPet?.name || '',
+      petId: this.selectedPet?.id || null
+    };
+
+    this.petService.saveAdoptionRequest(request).subscribe({
       next: () => {
         this.submitted = true;
         this.cdr.detectChanges();
